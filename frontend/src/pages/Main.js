@@ -4,7 +4,7 @@ const Main = () => {
   return (
     <div>
       <h1>메인페이지</h1>
-      <Cube>123</Cube>
+      <Cube />
     </div>
   );
 };
