@@ -8,7 +8,7 @@ const CubeBackground = () => {
     <Canvas camera={{ position: [3, 3, 3] }}>
       <ambientLight intensity={5} />
       <pointLight position={[10, 10, 10]} />
-      <CubeComp />
+      <CubeComp rotationSpeed={0.005} />
       <OrbitControls enablePan={false} />
     </Canvas>
   );
