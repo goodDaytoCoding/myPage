@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
   const [isHovered, setIsHovered] = useState(false);
+  const [startCoordinate, setStartCoordinate] = useState({ x: null, y: null });
+  const [endCoordinate, setEndCoordinate] = useState({ x: null, y: null });
   const { raycaster, camera, mouse } = useThree();
   const navigate = useNavigate();
   const meshRef = useRef();
+
   const materials = [
     new THREE.MeshStandardMaterial({ color: 'red' }),
     new THREE.MeshStandardMaterial({ color: 'green' }),
@@ -18,40 +21,48 @@ const CubeComp = ({ rotationSpeed }) => {
     new THREE.MeshStandardMaterial({ color: 'orange' }),
   ];
 
+  const faceURLs = [
+    '/profile',
+    '/aboutme',
+    '/gitaddress',
+    '/review',
+    '/stack',
+    '/portfolio',
+  ];
+
   const getNextURL = useCallback((faceIndex) => {
-    const faceURLs = [
-      '/profile',
-      '/aboutme',
-      '/gitaddress',
-      '/review',
-      '/stack',
-      '/portfolio',
-    ];
     const currentFace = faceURLs[faceIndex];
     setNextPage(currentFace);
   }, []);
 
-  //클릭을 때는 순간 최종적으로 커서가 위치한 곳이 처음 큐브의 한 면을 클릭 했을때와 다른 면이라면 커서가 최종적으로 위치한 면의 url로 이동함.
-  //클릭했을때의 커서위치와 최종위치가 다르다면 이동을 막아야함(큐브를 회전하는 경우를 구분할 수 있게 해야함)
-  const onPointerDown = useCallback(() => {
-    console.log('클릭한 순간');
+  const onPointerDown = useCallback((event) => {
+    setStartCoordinate({ x: event.clientX, y: event.clientY });
     window.addEventListener('pointerup', onPointerUp);
   }, []);
 
-  const onPointerUp = useCallback(
-    (event) => {
-      console.log('클릭 때는 순간');
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(meshRef.current);
-      if (intersects.length > 0) {
-        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-        getNextURL(faceIndex);
+  const onPointerUp = useCallback((event) => {
+    setEndCoordinate({ x: event.clientX, y: event.clientY });
+    window.removeEventListener('pointerup', onPointerUp);
+  }, []);
+
+  useEffect(() => {
+    if (endCoordinate.x !== null && endCoordinate.y !== null) {
+      const distance = Math.sqrt(
+        Math.pow(endCoordinate.x - startCoordinate.x, 2) +
+          Math.pow(endCoordinate.y - startCoordinate.y, 2),
+      );
+
+      if (distance < 5) {
+        // 클릭 위치가 거의 동일한 경우 (픽셀 단위 허용 범위)
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(meshRef.current);
+        if (intersects.length > 0) {
+          const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+          getNextURL(faceIndex);
+        }
       }
-      window.removeEventListener('pointerup', onPointerUp);
-    },
-    [raycaster, camera, mouse, getNextURL],
-  );
-  //pointerDown과 PointerUp 함수를 수정하기
+    }
+  }, [endCoordinate, startCoordinate, raycaster, camera, mouse, getNextURL]);
 
   const onPointerOver = useCallback(() => {
     setIsHovered(true);
