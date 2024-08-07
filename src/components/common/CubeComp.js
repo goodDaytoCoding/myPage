@@ -21,29 +21,28 @@ const CubeComp = ({ rotationSpeed }) => {
     new THREE.MeshStandardMaterial({ color: 'orange' }),
   ];
 
-  const faceURLs = [
-    '/profile',
-    '/aboutme',
-    '/gitaddress',
-    '/review',
-    '/stack',
-    '/portfolio',
-  ];
-
   const getNextURL = useCallback((faceIndex) => {
+    const faceURLs = [
+      '/profile',
+      '/aboutme',
+      '/gitaddress',
+      '/review',
+      '/stack',
+      '/portfolio',
+    ];
     const currentFace = faceURLs[faceIndex];
     setNextPage(currentFace);
   }, []);
 
-  const onPointerDown = useCallback((event) => {
+  const onPointerDown = (event) => {
     setStartCoordinate({ x: event.clientX, y: event.clientY });
     window.addEventListener('pointerup', onPointerUp);
-  }, []);
+  };
 
-  const onPointerUp = useCallback((event) => {
+  const onPointerUp = (event) => {
     setEndCoordinate({ x: event.clientX, y: event.clientY });
     window.removeEventListener('pointerup', onPointerUp);
-  }, []);
+  };
 
   useEffect(() => {
     if (endCoordinate.x !== null && endCoordinate.y !== null) {
@@ -64,13 +63,13 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   }, [endCoordinate, startCoordinate, raycaster, camera, mouse, getNextURL]);
 
-  const onPointerOver = useCallback(() => {
+  const onPointerOver = () => {
     setIsHovered(true);
-  }, []);
+  };
 
-  const onPointerOut = useCallback(() => {
+  const onPointerOut = () => {
     setIsHovered(false);
-  }, []);
+  };
 
   useEffect(() => {
     if (nextPage !== '/') {
