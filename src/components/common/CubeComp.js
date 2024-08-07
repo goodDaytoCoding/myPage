@@ -11,15 +11,19 @@ const CubeComp = ({ rotationSpeed }) => {
   const { raycaster, camera, mouse } = useThree();
   const navigate = useNavigate();
   const meshRef = useRef();
-
-  const materials = [
-    new THREE.MeshStandardMaterial({ color: 'red' }),
-    new THREE.MeshStandardMaterial({ color: 'green' }),
-    new THREE.MeshStandardMaterial({ color: 'blue' }),
-    new THREE.MeshStandardMaterial({ color: 'yellow' }),
-    new THREE.MeshStandardMaterial({ color: 'purple' }),
-    new THREE.MeshStandardMaterial({ color: 'orange' }),
+  const textureLoader = new THREE.TextureLoader();
+  const faceTextures = [
+    //경로는 public 폴더가 기본으로 되어있음.
+    textureLoader.load('textures/profile.jpg'),
+    textureLoader.load('textures/aboutme.jpg'),
+    textureLoader.load('textures/gitaddress.png'),
+    textureLoader.load('textures/review.jpg'),
+    textureLoader.load('textures/stack.jpg'),
+    textureLoader.load('textures/portfolio.jpg'),
   ];
+  const materials = faceTextures.map(
+    (texture) => new THREE.MeshBasicMaterial({ map: texture }),
+  );
 
   const getNextURL = useCallback((faceIndex) => {
     const faceURLs = [
@@ -93,7 +97,8 @@ const CubeComp = ({ rotationSpeed }) => {
     >
       <boxGeometry args={[3, 3, 3]} />
       {materials.map((material, index) => (
-        <meshStandardMaterial
+        //이미지를 사용하려면 meshBasicMaterial 텍스트를 사용하려면 meshStandardMaterial
+        <meshBasicMaterial
           key={index}
           attach={`material-${index}`}
           {...material}
