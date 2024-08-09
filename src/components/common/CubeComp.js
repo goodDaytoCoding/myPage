@@ -67,13 +67,13 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   }, [endCoordinate, startCoordinate, raycaster, camera, mouse, getNextURL]);
 
-  const onPointerOver = () => {
+  const onPointerOver = useCallback(() => {
     setIsHovered(true);
-  };
+  }, []);
 
-  const onPointerOut = () => {
+  const onPointerOut = useCallback(() => {
     setIsHovered(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (nextPage !== '/') {
