@@ -11,7 +11,7 @@ const CubeBackground = () => {
       <ambientLight intensity={5} />
       <pointLight position={[10, 10, 10]} />
       <CubeComp rotationSpeed={0.005} />
-      <Stars />
+      <Stars numStars={5000} spreadRange={200} color={'#ffffff'} size={0.7} />
       <OrbitControls enablePan={false} />
     </Canvas>
   );
