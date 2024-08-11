@@ -176,11 +176,12 @@
 // };
 
 // export default Stars;
+
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import React, { useMemo, useRef } from 'react';
 
-const Stars = ({ numStars, spreadRange, color, size }) => {
+const Stars = ({ numStars, spreadRange, color, size, rotationSpeed }) => {
   const points = useRef();
 
   // 별 텍스처 생성 함수
@@ -200,6 +201,10 @@ const Stars = ({ numStars, spreadRange, color, size }) => {
 
     // 캔버스를 텍스처로 변환
     const star = new THREE.CanvasTexture(canvas);
+    const state = star.userData;
+    state.x = 'test';
+    state.y = 'test';
+    console.log(star);
     return star;
   };
 
@@ -221,6 +226,7 @@ const Stars = ({ numStars, spreadRange, color, size }) => {
       'position',
       generateStarPositions(numStars, spreadRange),
     );
+
     return geometry;
   }, [numStars, spreadRange]);
 
@@ -232,7 +238,7 @@ const Stars = ({ numStars, spreadRange, color, size }) => {
     const timers = new Float32Array(numStars);
     for (let i = 0; i < numStars; i++) {
       array[i] = 0; // 초기 상태: 어두운 상태
-      timers[i] = (Math.random() * 100).toFixed(2); // 타이머 초기값 설정 (랜덤하게 시작)
+      timers[i] = Math.random() * 100; // 타이머 초기값 설정 (랜덤하게 시작)
     }
 
     return { array, timers };
@@ -242,7 +248,6 @@ const Stars = ({ numStars, spreadRange, color, size }) => {
     for (let i = 0; i < numStars; i++) {
       // 별 상태 업데이트 (서서히 밝아졌다가 어두워지기)
       states.timers[i] += 1; // 타이머를 증가시킴
-
       if (states.array[i] < 1 && states.timers[i] < 100) {
         // 0 ~ 100까지 서서히 밝아짐
         states.array[i] += 0.01;
@@ -250,7 +255,6 @@ const Stars = ({ numStars, spreadRange, color, size }) => {
         // 100 ~ 200까지 서서히 어두워짐
         states.array[i] -= 0.01;
       }
-
       if (states.timers[i] >= 200) {
         states.timers[i] = 0; // 타이머를 초기화
       }
