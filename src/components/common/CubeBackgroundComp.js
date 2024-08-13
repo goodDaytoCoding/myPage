@@ -13,7 +13,7 @@ const CubeBackground = () => {
         <color attach="background" args={['black']} />
         <ambientLight intensity={5} />
         <pointLight position={[10, 10, 10]} />
-
+        <CubeComp rotationSpeed={0.005} />
         <Stars
           numStars={3}
           spreadRange={10}
@@ -36,9 +36,7 @@ const CubeBackground = () => {
           />
         </EffectComposer>
       </Canvas>
-      <Canvas camera={{ position: [10, 10, 10] }}>
-        <CubeComp rotationSpeed={0.005} />
-      </Canvas>
+      <Canvas camera={{ position: [10, 10, 10] }}></Canvas>
     </>
   );
 };

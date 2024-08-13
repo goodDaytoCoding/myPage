@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
-  const [isHovered, setIsHovered] = useState(false);
   const [startCoordinate, setStartCoordinate] = useState({ x: null, y: null });
   const [endCoordinate, setEndCoordinate] = useState({ x: null, y: null });
   const { raycaster, camera, mouse } = useThree();
   const navigate = useNavigate();
   const meshRef = useRef();
   const textureLoader = new THREE.TextureLoader();
+  const rotationSpeedRef = useRef(rotationSpeed); // rotationSpeed를 ref로 저장
   const faceTextures = [
     //경로는 public 폴더가 기본으로 되어있음.
     textureLoader.load('textures/profile.jpg'),
@@ -68,12 +68,12 @@ const CubeComp = ({ rotationSpeed }) => {
   }, [endCoordinate, startCoordinate, raycaster, camera, mouse, getNextURL]);
 
   const onPointerOver = useCallback(() => {
-    setIsHovered(true);
+    rotationSpeedRef.current = 0; // 마우스 오버 시 회전 속도를 0으로 설정
   }, []);
 
   const onPointerOut = useCallback(() => {
-    setIsHovered(false);
-  }, []);
+    rotationSpeedRef.current = rotationSpeed; // 마우스 아웃 시 회전 속도를 원래대로 설정
+  }, [rotationSpeed]);
 
   useEffect(() => {
     if (nextPage !== '/') {
@@ -81,10 +81,12 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   }, [nextPage, navigate]);
 
+  //onPointerOver, onPointerOut 함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
+  //ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
-    if (meshRef.current && !isHovered) {
-      meshRef.current.rotation.x += rotationSpeed;
-      meshRef.current.rotation.y += rotationSpeed;
+    if (meshRef.current) {
+      meshRef.current.rotation.x += rotationSpeedRef.current;
+      meshRef.current.rotation.y += rotationSpeedRef.current;
     }
   });
 
