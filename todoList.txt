@@ -1,4 +1,7 @@
-큐브 플리커 현상: 잦은 상태변화로 인해 발생한 flickering 현상이었음. onPointerOver, onPointerOut 함수를 상태변경이 아닌 ref를 통한 제어 방식으로 수정하여 문제해결함.
+1 - 큐브 플리커 현상
+=> 잦은 상태변화로 인해 발생한 flickering 현상이었음.
+   onPointerOver, onPointerOut 함수를 상태변경이 아닌 ref를 통한 제어 방식으로 수정하여 문제해결함.
+   onPointerDown, onPointerUp 함수 또한 상태변경이 아닌 ref를 통해 제어하여 현재는 flickering 현상이 발생하지 않음.
 
 별들 개별적인 상태부여
 

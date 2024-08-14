@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
-  const [startCoordinate, setStartCoordinate] = useState({ x: null, y: null });
-  const [endCoordinate, setEndCoordinate] = useState({ x: null, y: null });
   const { raycaster, camera, mouse } = useThree();
   const navigate = useNavigate();
   const meshRef = useRef();
-  const textureLoader = new THREE.TextureLoader();
+  const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
+  const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
   const rotationSpeedRef = useRef(rotationSpeed); // rotationSpeed를 ref로 저장
+  const textureLoader = new THREE.TextureLoader();
   const faceTextures = [
     //경로는 public 폴더가 기본으로 되어있음.
     textureLoader.load('textures/profile.jpg'),
@@ -39,33 +39,29 @@ const CubeComp = ({ rotationSpeed }) => {
   }, []);
 
   const onPointerDown = (event) => {
-    setStartCoordinate({ x: event.clientX, y: event.clientY });
+    startCoordinateRef.current = { x: event.clientX, y: event.clientY }; // 시작 좌표 저장
     window.addEventListener('pointerup', onPointerUp);
   };
 
   const onPointerUp = (event) => {
-    setEndCoordinate({ x: event.clientX, y: event.clientY });
+    endCoordinateRef.current = { x: event.clientX, y: event.clientY }; // 끝 좌표 저장
     window.removeEventListener('pointerup', onPointerUp);
-  };
 
-  useEffect(() => {
-    if (endCoordinate.x !== null && endCoordinate.y !== null) {
-      const distance = Math.sqrt(
-        Math.pow(endCoordinate.x - startCoordinate.x, 2) +
-          Math.pow(endCoordinate.y - startCoordinate.y, 2),
-      );
+    const distance = Math.sqrt(
+      Math.pow(endCoordinateRef.current.x - startCoordinateRef.current.x, 2) +
+        Math.pow(endCoordinateRef.current.y - startCoordinateRef.current.y, 2),
+    );
 
-      if (distance < 5) {
-        // 클릭 위치가 거의 동일한 경우 (픽셀 단위 허용 범위)
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObject(meshRef.current);
-        if (intersects.length > 0) {
-          const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-          getNextURL(faceIndex);
-        }
+    if (distance < 5) {
+      // 클릭 위치가 거의 동일한 경우 (픽셀 단위 허용 범위)
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(meshRef.current);
+      if (intersects.length > 0) {
+        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+        getNextURL(faceIndex);
       }
     }
-  }, [endCoordinate, startCoordinate, raycaster, camera, mouse, getNextURL]);
+  };
 
   const onPointerOver = useCallback(() => {
     rotationSpeedRef.current = 0; // 마우스 오버 시 회전 속도를 0으로 설정
@@ -93,6 +89,7 @@ const CubeComp = ({ rotationSpeed }) => {
   return (
     <mesh
       ref={meshRef}
+      onPointerUp={onPointerUp}
       onPointerDown={onPointerDown}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}

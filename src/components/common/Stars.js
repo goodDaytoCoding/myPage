@@ -204,7 +204,7 @@ const Stars = ({ numStars, spreadRange, color, size, rotationSpeed }) => {
     const state = star.userData;
     state.x = 'test';
     state.y = 'test';
-    console.log(star);
+    // console.log(star);
     return star;
   };
 
