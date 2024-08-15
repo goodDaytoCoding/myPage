@@ -77,7 +77,7 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   }, [nextPage, navigate]);
 
-  //onPointerOver, onPointerOut 함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
+  //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
     if (meshRef.current) {
