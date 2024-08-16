@@ -1,7 +1,14 @@
 import * as THREE from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../CubeBackground.css';
 
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
@@ -11,16 +18,21 @@ const CubeComp = ({ rotationSpeed }) => {
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
   const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
   const rotationSpeedRef = useRef(rotationSpeed); // rotationSpeed를 ref로 저장
-  const textureLoader = new THREE.TextureLoader();
-  const faceTextures = [
-    //경로는 public 폴더가 기본으로 되어있음.
-    textureLoader.load('textures/profile.jpg'),
-    textureLoader.load('textures/aboutme.jpg'),
-    textureLoader.load('textures/gitaddress.png'),
-    textureLoader.load('textures/review.jpg'),
-    textureLoader.load('textures/stack.jpg'),
-    textureLoader.load('textures/portfolio.jpg'),
-  ];
+  const lastHoveredFaceIndexRef = useRef(null); // 마지막으로 색상이 변경된 면의 인덱스 추적
+
+  // `useMemo`를 사용해 `faceTextures` 배열을 메모이제이션, 렌더링마다 재생성되기 때문에 useMemo 사용
+  const faceTextures = useMemo(
+    () => [
+      // 경로는 public 폴더가 기본으로 되어있음.
+      new THREE.TextureLoader().load('textures/profile.jpg'),
+      new THREE.TextureLoader().load('textures/aboutme.jpg'),
+      new THREE.TextureLoader().load('textures/gitaddress.png'),
+      new THREE.TextureLoader().load('textures/review.jpg'),
+      new THREE.TextureLoader().load('textures/stack.jpg'),
+      new THREE.TextureLoader().load('textures/portfolio.jpg'),
+    ],
+    [],
+  );
   const materials = faceTextures.map(
     (texture) => new THREE.MeshBasicMaterial({ map: texture }),
   );
@@ -63,13 +75,54 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   };
 
-  const onPointerOver = useCallback(() => {
-    rotationSpeedRef.current = 0; // 마우스 오버 시 회전 속도를 0으로 설정
-  }, []);
+  const onPointerOver = useCallback(
+    (event) => {
+      rotationSpeedRef.current = 0; // 마우스 오버 시 회전 속도를 0으로 설정
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(meshRef.current);
+      if (intersects.length > 0) {
+        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+        // 적용하고 싶은 CSS 변화에 해당하는 코드 작성
+        meshRef.current.material[faceIndex].color.set(0xff0000); // 예: 빨간색으로 변경
+      }
+    },
+    [raycaster, camera, mouse],
+  );
 
   const onPointerOut = useCallback(() => {
     rotationSpeedRef.current = rotationSpeed; // 마우스 아웃 시 회전 속도를 원래대로 설정
-  }, [rotationSpeed]);
+
+    // 원래 텍스처로 돌아오기 위해 컬러를 초기화
+    faceTextures.forEach((texture, index) => {
+      meshRef.current.material[index].map = texture;
+      meshRef.current.material[index].color.set(0xffffff); // 원래 색으로 복귀
+    });
+  }, [rotationSpeed, faceTextures]);
+
+  const onPointerMove = useCallback(
+    (event) => {
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(meshRef.current);
+      if (intersects.length > 0) {
+        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+
+        // 면이 변경된 경우에만 초기화 및 색상 변경 수행
+        if (faceIndex !== lastHoveredFaceIndexRef.current) {
+          // 이전에 색상이 변경된 면을 기본 상태로 초기화
+          if (lastHoveredFaceIndexRef.current !== null) {
+            meshRef.current.material[lastHoveredFaceIndexRef.current].color.set(
+              0xffffff,
+            );
+          }
+
+          // 새로운 면의 색상을 변경
+          meshRef.current.material[faceIndex].color.set(0xff0000); // 예: 빨간색으로 변경
+          lastHoveredFaceIndexRef.current = faceIndex; // 현재 면 인덱스를 저장
+        }
+      }
+    },
+    [raycaster, camera, mouse],
+  );
 
   useEffect(() => {
     if (nextPage !== '/') {
@@ -93,6 +146,7 @@ const CubeComp = ({ rotationSpeed }) => {
       onPointerDown={onPointerDown}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
+      onPointerMove={onPointerMove}
     >
       <boxGeometry args={[3, 3, 3]} />
       {materials.map((material, index) => (

@@ -4,7 +4,6 @@ import { OrbitControls } from '@react-three/drei';
 
 import CubeComp from './CubeComp';
 import Stars from './Stars';
-import '../../CubeBackground.css';
 
 const CubeBackground = () => {
   return (

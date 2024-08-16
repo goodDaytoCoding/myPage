@@ -9,3 +9,9 @@
 .stars {
   position: absolute;
 }
+
+.hover123 {
+  background-color: red;
+  border: 3px black;
+  opacity: 0.5;
+}
