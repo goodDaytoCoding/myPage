@@ -8,6 +8,7 @@ import Stars from './Stars';
 const CubeBackground = () => {
   return (
     <div className="cubeBackground">
+      <div className="title">포트폴리오</div>
       <Stars />
       <Canvas camera={{ position: [10, 10, 10] }}>
         <ambientLight intensity={5} />

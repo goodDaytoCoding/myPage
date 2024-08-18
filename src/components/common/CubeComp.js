@@ -26,7 +26,7 @@ const CubeComp = ({ rotationSpeed }) => {
       // 경로는 public 폴더가 기본으로 되어있음.
       new THREE.TextureLoader().load('textures/profile.jpg'),
       new THREE.TextureLoader().load('textures/aboutme.jpg'),
-      new THREE.TextureLoader().load('textures/gitaddress.png'),
+      new THREE.TextureLoader().load('textures/gitaddress.jpg'),
       new THREE.TextureLoader().load('textures/review.jpg'),
       new THREE.TextureLoader().load('textures/stack.jpg'),
       new THREE.TextureLoader().load('textures/portfolio.jpg'),
