@@ -12,9 +12,10 @@ import '../../CubeBackground.css';
 
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
-  const { raycaster, camera, mouse } = useThree();
+  const { raycaster, camera, mouse, scene } = useThree();
   const navigate = useNavigate();
   const meshRef = useRef();
+  const edgesRef = useRef(); // 테두리를 위한 ref
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
   const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
   const rotationSpeedRef = useRef(rotationSpeed); // rotationSpeed를 ref로 저장
@@ -130,12 +131,37 @@ const CubeComp = ({ rotationSpeed }) => {
     }
   }, [nextPage, navigate]);
 
+  useEffect(() => {
+    // 큐브의 테두리를 생성
+    if (meshRef.current) {
+      const edgesGeometry = new THREE.EdgesGeometry(meshRef.current.geometry);
+      const edgesMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        linewidth: 1,
+      });
+      const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+      scene.add(edges);
+      edgesRef.current = edges;
+    }
+    return () => {
+      if (edgesRef.current) {
+        scene.remove(edgesRef.current);
+        edgesRef.current.geometry.dispose();
+        edgesRef.current.material.dispose();
+      }
+    };
+  }, [scene]);
   //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += rotationSpeedRef.current;
       meshRef.current.rotation.y += rotationSpeedRef.current;
+    }
+
+    // 테두리도 큐브와 함께 회전
+    if (edgesRef.current) {
+      edgesRef.current.rotation.copy(meshRef.current.rotation);
     }
   });
 
