@@ -35,7 +35,12 @@ const CubeComp = ({ rotationSpeed }) => {
     [],
   );
   const materials = faceTextures.map(
-    (texture) => new THREE.MeshBasicMaterial({ map: texture }),
+    (texture) =>
+      new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        // opacity: 1,
+      }),
   );
 
   const getNextURL = useCallback((faceIndex) => {
@@ -84,7 +89,8 @@ const CubeComp = ({ rotationSpeed }) => {
       if (intersects.length > 0) {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
         // 적용하고 싶은 CSS 변화에 해당하는 코드 작성
-        meshRef.current.material[faceIndex].color.set(0xff0000); // 예: 빨간색으로 변경
+        meshRef.current.material[faceIndex].opacity = 0.7; // opacity 조절
+        edgesRef.current.material.color.set(0xffffff);
       }
     },
     [raycaster, camera, mouse],
@@ -93,10 +99,10 @@ const CubeComp = ({ rotationSpeed }) => {
   const onPointerOut = useCallback(() => {
     rotationSpeedRef.current = rotationSpeed; // 마우스 아웃 시 회전 속도를 원래대로 설정
 
-    // 원래 텍스처로 돌아오기 위해 컬러를 초기화
+    // 원래 텍스처로 돌아오기 위해 opacity를 초기화
     faceTextures.forEach((texture, index) => {
       meshRef.current.material[index].map = texture;
-      meshRef.current.material[index].color.set(0xffffff); // 원래 색으로 복귀
+      meshRef.current.material[index].opacity = 1; // opacity 복귀
     });
   }, [rotationSpeed, faceTextures]);
 
@@ -111,13 +117,13 @@ const CubeComp = ({ rotationSpeed }) => {
         if (faceIndex !== lastHoveredFaceIndexRef.current) {
           // 이전에 색상이 변경된 면을 기본 상태로 초기화
           if (lastHoveredFaceIndexRef.current !== null) {
-            meshRef.current.material[lastHoveredFaceIndexRef.current].color.set(
-              0xffffff,
-            );
+            meshRef.current.material[
+              lastHoveredFaceIndexRef.current
+            ].opacity = 1;
           }
 
           // 새로운 면의 색상을 변경
-          meshRef.current.material[faceIndex].color.set(0xff0000); // 예: 빨간색으로 변경
+          meshRef.current.material[faceIndex].opacity = 0.7; // opacity 조절
           lastHoveredFaceIndexRef.current = faceIndex; // 현재 면 인덱스를 저장
         }
       }
@@ -136,8 +142,8 @@ const CubeComp = ({ rotationSpeed }) => {
     if (meshRef.current) {
       const edgesGeometry = new THREE.EdgesGeometry(meshRef.current.geometry);
       const edgesMaterial = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        linewidth: 1,
+        color: 'white', //border color
+        linewidth: 1, //linewidth는 WebGL렌더러에 의해 설정값과 무관하게 1로 고정됨...
       });
       const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
       scene.add(edges);
