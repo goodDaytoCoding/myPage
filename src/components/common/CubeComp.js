@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { useThree, useFrame } from '@react-three/fiber';
+import { useThree, useFrame, extend } from '@react-three/fiber';
 import React, {
   useCallback,
   useEffect,
@@ -8,7 +8,12 @@ import React, {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Line2 } from 'three/examples/jsm/lines/Line2';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import '../../CubeBackground.css';
+
+extend({ Line2, LineMaterial, LineGeometry });
 
 const CubeComp = ({ rotationSpeed }) => {
   const [nextPage, setNextPage] = useState('/');
@@ -90,7 +95,6 @@ const CubeComp = ({ rotationSpeed }) => {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
         // 적용하고 싶은 CSS 변화에 해당하는 코드 작성
         meshRef.current.material[faceIndex].opacity = 0.7; // opacity 조절
-        edgesRef.current.material.color.set(0xffffff);
       }
     },
     [raycaster, camera, mouse],
@@ -131,6 +135,97 @@ const CubeComp = ({ rotationSpeed }) => {
     [raycaster, camera, mouse],
   );
 
+  //테두리큐브
+  const createCubeEdges = () => {
+    //테두리 구석하는 point들의 x,y,z 좌표를 조절하여 테두리 형성
+    const points = [
+      1.5,
+      1.5,
+      1.5, //
+      1.5,
+      -1.5,
+      1.5, //
+      1.5,
+      1.5,
+      1.5, //
+      -1.5,
+      1.5,
+      1.5, //
+      -1.5,
+      -1.5,
+      1.5, //
+      -1.5,
+      1.5,
+      1.5, //
+      -1.5,
+      -1.5,
+      1.5, //
+      1.5,
+      -1.5,
+      1.5, //
+      1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      1.5,
+      -1.5, //
+      -1.5,
+      1.5,
+      -1.5, //
+      -1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      -1.5,
+      -1.5, //
+      -1.5,
+      -1.5,
+      -1.5, //
+      -1.5,
+      -1.5,
+      1.5, //
+      -1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      -1.5,
+      -1.5, //
+      1.5,
+      1.5,
+      -1.5, //
+      1.5,
+      1.5,
+      1.5, //
+      1.5,
+      1.5,
+      1.5, //
+      -1.5,
+      1.5,
+      1.5, //
+      -1.5,
+      1.5,
+      -1.5, //
+    ];
+
+    const geometry = new LineGeometry();
+    geometry.setPositions(points);
+
+    const material = new LineMaterial({
+      color: 0xffffff, //테두리 색상
+      linewidth: 5, //테두리 굵기
+      resolution: new THREE.Vector2(window.innerWidth, window.innerHeight), //테두리 해상도 설정
+    });
+
+    const line = new Line2(geometry, material);
+    return line;
+  };
+
   useEffect(() => {
     if (nextPage !== '/') {
       navigate(nextPage);
@@ -138,25 +233,15 @@ const CubeComp = ({ rotationSpeed }) => {
   }, [nextPage, navigate]);
 
   useEffect(() => {
-    // 큐브의 테두리를 생성
-    if (meshRef.current) {
-      const edgesGeometry = new THREE.EdgesGeometry(meshRef.current.geometry);
-      const edgesMaterial = new THREE.LineBasicMaterial({
-        color: 'white', //border color
-        linewidth: 1, //linewidth는 WebGL렌더러에 의해 설정값과 무관하게 1로 고정됨...
-      });
-      const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
-      scene.add(edges);
-      edgesRef.current = edges;
-    }
+    const cubeEdges = createCubeEdges();
+    scene.add(cubeEdges);
+    edgesRef.current = cubeEdges;
+
     return () => {
-      if (edgesRef.current) {
-        scene.remove(edgesRef.current);
-        edgesRef.current.geometry.dispose();
-        edgesRef.current.material.dispose();
-      }
+      scene.remove(cubeEdges);
     };
   }, [scene]);
+
   //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
@@ -164,8 +249,7 @@ const CubeComp = ({ rotationSpeed }) => {
       meshRef.current.rotation.x += rotationSpeedRef.current;
       meshRef.current.rotation.y += rotationSpeedRef.current;
     }
-
-    // 테두리도 큐브와 함께 회전
+    // // 테두리도 큐브와 함께 회전
     if (edgesRef.current) {
       edgesRef.current.rotation.copy(meshRef.current.rotation);
     }
