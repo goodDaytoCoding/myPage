@@ -24,5 +24,10 @@
 => 기존의 LineBasicMaterial은 lineWidth가 WebGL렌더러에 의해 설정과 무관하게 1로 고정되어 원하는 효과를 넣지 못함.
 => EdgesGeometry,shaderMaterial을 이용한 방법또한 lineWidth가 1로 고정되었음.
 => LineGeometry,LineMaterial을 이용하여 lineWidth 조절가능한 테두리 만듦.
-   하지만 points의 x,y,z 좌표값을 일일히 설정해서 올바른 테두리 만들기 위해 시간투자함..
+   하지만 LineMaterial을 사용하여 points의 x,y,z 좌표값을 일일히 설정해서 올바른 테두리 만들기 위해 시간투자함..
    (그전에 소스를 가져와서 만들었던 테두리는 중심이 맞지않아 큐브와 따로 회전했음..)
+=> 테두리 효과는 UnrealBloomPass, RenderPass, EffectComposer을 사용하여 Bloom 효과 적용함
+
+8 - 파일 정리
+=> Cube와 Edge를 분리하고 Scene을 분리하였음.
+=> Cube와 Edge의 ref가 분리되어 함께 회전하지 않고있음..

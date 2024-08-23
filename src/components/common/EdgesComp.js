@@ -18,7 +18,7 @@ extend({
   UnrealBloomPass,
 });
 
-const CubeEdges = () => {
+const CubeEdges = ({ rotationSpeed }) => {
   const edgesRef = useRef(); // 테두리를 위한 ref
 
   const createCubeEdges = () => {
@@ -61,6 +61,12 @@ const CubeEdges = () => {
       // 매 프레임마다 큐브 테두리를 장면에 추가
       scene.add(edgesRef.current);
     }
+
+    if (edgesRef.current) {
+      // 매 프레임마다 큐브 테두리를 장면에 추가 및 회전 적용
+      edgesRef.current.rotation.x += rotationSpeed;
+      edgesRef.current.rotation.y += rotationSpeed;
+    }
   });
 
   return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
@@ -77,7 +83,7 @@ const Effects = () => {
     const renderPass = new RenderPass(scene, camera);
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
-      1.5, // 블룸 강도
+      0.9, // 블룸 강도
       0.4, // 블룸 반경
       0.85, // 블룸 세부 조정
     );
@@ -96,12 +102,12 @@ const Effects = () => {
   return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
 };
 
-const EdgesScene = () => {
+const EdgesScene = ({ rotationSpeed }) => {
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
-      <CubeEdges />
+      <CubeEdges rotationSpeed={rotationSpeed} />
       <OrbitControls
         enablePan={false}
         enableRotate={true}

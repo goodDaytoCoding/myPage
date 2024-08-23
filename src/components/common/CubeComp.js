@@ -11,14 +11,13 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import '../../CubeBackground.css';
 
-const CubeComp = ({ rotationSpeed, camera }) => {
+const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
   const { raycaster, mouse } = useThree();
   const [nextPage, setNextPage] = useState('/');
   const navigate = useNavigate();
   const meshRef = useRef();
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
   const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
-  const rotationSpeedRef = useRef(rotationSpeed); //rotationSpeed를 ref로 저장
   const lastHoveredFaceIndexRef = useRef(null); // 마지막으로 선택된 면의 인덱스 추적
 
   // `useMemo`를 사용해 `faceTextures` 배열을 메모이제이션, 렌더링마다 재생성되기 때문에 useMemo 사용
@@ -81,7 +80,7 @@ const CubeComp = ({ rotationSpeed, camera }) => {
 
   const onPointerOver = useCallback(
     (event) => {
-      rotationSpeedRef.current = 0; // 마우스 오버 시 회전 속도를 0으로 설정
+      changeRotationSpeed(0); //회전 정지
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObject(meshRef.current);
       if (intersects.length > 0) {
@@ -90,17 +89,17 @@ const CubeComp = ({ rotationSpeed, camera }) => {
         meshRef.current.material[faceIndex].opacity = 0.7; //opacity 조절
       }
     },
-    [raycaster, camera, mouse],
+    [raycaster, camera, mouse, changeRotationSpeed],
   );
 
   const onPointerOut = useCallback(() => {
-    rotationSpeedRef.current = rotationSpeed; // 마우스 아웃 시 회전 속도를 원래대로 설정
+    changeRotationSpeed(0.005); //회전속도 0.005로 회복
 
     // 원래 텍스처로 돌아오기 위해 opacity를 초기화
     materials.forEach((_, index) => {
       meshRef.current.material[index].opacity = 1;
     });
-  }, [rotationSpeed, materials]);
+  }, [materials, changeRotationSpeed]);
 
   const onPointerMove = useCallback(() => {
     raycaster.setFromCamera(mouse, camera);
@@ -131,8 +130,8 @@ const CubeComp = ({ rotationSpeed, camera }) => {
   //ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += rotationSpeedRef.current;
-      meshRef.current.rotation.y += rotationSpeedRef.current;
+      meshRef.current.rotation.x += rotationSpeed;
+      meshRef.current.rotation.y += rotationSpeed;
     }
   });
 
@@ -158,7 +157,7 @@ const CubeComp = ({ rotationSpeed, camera }) => {
   );
 };
 
-const CubeScene = () => {
+const CubeScene = ({ rotationSpeed, changeRotationSpeed }) => {
   const { gl, camera } = useThree();
   const scene = useRef();
 
@@ -172,7 +171,11 @@ const CubeScene = () => {
     <scene ref={scene}>
       <ambientLight intensity={5} />
       <pointLight position={[10, 10, 10]} />
-      <CubeComp rotationSpeed={0.005} camera={camera} />
+      <CubeComp
+        changeRotationSpeed={changeRotationSpeed}
+        rotationSpeed={rotationSpeed}
+        camera={camera}
+      />
       <OrbitControls
         enablePan={false}
         enableRotate={true}
