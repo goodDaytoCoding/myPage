@@ -49,6 +49,7 @@ const CubeEdges = ({ rotationSpeed }) => {
   useEffect(() => {
     const cubeEdges = createCubeEdges();
     edgesRef.current = cubeEdges;
+
     return () => {
       // 컴포넌트 언마운트 시 자원 해제
       cubeEdges.geometry.dispose();
@@ -103,8 +104,17 @@ const Effects = () => {
 };
 
 const EdgesScene = ({ rotationSpeed }) => {
+  const { gl, camera } = useThree();
+  const scene = useRef();
+
+  useFrame(() => {
+    gl.autoClear = false; //이전 렌더링 내용 유지 및 새로운 장면이 기존 내용 위에 렌더링 됨. 여러 렌더링 패스 사용시 유용한 설정
+    gl.clearDepth(); //깊이 버퍼 삭제
+    gl.render(scene.current, camera);
+  });
+
   return (
-    <>
+    <scene ref={scene}>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
       <CubeEdges rotationSpeed={rotationSpeed} />
@@ -115,7 +125,7 @@ const EdgesScene = ({ rotationSpeed }) => {
         maxDistance={20}
       />
       <Effects />
-    </>
+    </scene>
   );
 };
 

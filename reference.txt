@@ -1,1 +1,2 @@
 https://velog.io/@hihijin/Three.js%EB%A1%9C-%EC%9D%B4%EB%A0%A5%EC%84%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%8F%84%ED%98%95%EC%97%90-%EC%9E%AC%EC%A7%88-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95Material
+https://github.com/mbalex99/threejs-unrealbloompass-transparent-background-example/blob/master/src/TransparentBackgroundFixedUnrealBloomPass.ts
