@@ -2,20 +2,22 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame, extend, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
+import { EffectComposer, RenderPass } from 'postprocessing';
+import SelectiveBloomPass from './SelectiveBloomPass';
 
 extend({
   Line2,
   LineMaterial,
   LineGeometry,
-  EffectComposer,
-  RenderPass,
-  UnrealBloomPass,
+  // EffectComposer,
+  // RenderPass,
+  // UnrealBloomPass,
 });
 
 const CubeEdges = ({ rotationSpeed }) => {
@@ -82,12 +84,7 @@ const Effects = () => {
     composer.current.setSize(size.width, size.height);
 
     const renderPass = new RenderPass(scene, camera);
-    const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(size.width, size.height),
-      0.9, // 블룸 강도
-      0.4, // 블룸 반경
-      0.85, // 블룸 세부 조정
-    );
+    const bloomPass = new SelectiveBloomPass(); // Use SelectiveBloomPass
 
     composer.current.addPass(renderPass);
     composer.current.addPass(bloomPass);
@@ -95,12 +92,11 @@ const Effects = () => {
 
   useFrame(() => {
     if (composer.current) {
-      // 매 프레임마다 composer를 사용하여 렌더링
       composer.current.render();
     }
   }, 1);
 
-  return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
+  return null;
 };
 
 const EdgesScene = ({ rotationSpeed }) => {
