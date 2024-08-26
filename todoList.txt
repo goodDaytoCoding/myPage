@@ -35,3 +35,5 @@
 
 9 - "UnrealBloomPass with transparent background" 문제 발생
 => UnrealBloomPass를 사용하면 배경이 검은색으로 변함. 그래서 Stars가 묻혀버림. 예시 코드 찾았으나 복잡함..
+=> SelectiveBloom을 사용해보려고 postprocessing과 react/postprocessing을 사용해 봤으나 여전히 문제해결 못함..
+=> vertextShader와 fragmentShader 코드를 공부해봐야 할 것 같음. 
