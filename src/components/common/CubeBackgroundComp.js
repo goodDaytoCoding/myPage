@@ -17,7 +17,7 @@ const CubeBackground = () => {
     <div className="cubeBackground">
       <Stars />
       <Canvas camera={{ position: [10, 10, 10] }}>
-        {/* <Stars2 numStars={3} spreadRange={13} color={'white'} size={1} /> */}
+        {/* <Stars2 numStars={300} spreadRange={300} color={'white'} size={1} /> */}
         <CubeScene
           changeRotationSpeed={changeRotationSpeed}
           rotationSpeed={rotationSpeed}
