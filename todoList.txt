@@ -6,6 +6,9 @@
 
 2 - 별들 개별적인 상태부여
 => 3D 별로 반짝이는 효과를 넣기에는 무리가 있어보였고 큐브와 분리했을 때 굳이 3D로 만들 이유가 없어서 2D로 바꾸었음.
+=> 2D는 transparent background issue 때문에 힘들어보여서 3D로 다시 바꿈.
+=> pointMaterial은 각 개체마다 다른 상태를 부여할 수 없어서 ShaderMaterial로 교체.
+=> 불투명도와 깜빡임 주기를 개별로 설정하여 별들이 따로 깜빡이게 만들었음.
 
 3 - 마우스로 큐브 회전하면 별과 같이 회전함
 => 2와 동일.
@@ -37,3 +40,5 @@
 => UnrealBloomPass를 사용하면 배경이 검은색으로 변함. 그래서 Stars가 묻혀버림. 예시 코드 찾았으나 복잡함..
 => SelectiveBloom을 사용해보려고 postprocessing과 react/postprocessing을 사용해 봤으나 여전히 문제해결 못함..
 => vertextShader와 fragmentShader GLSL코드를 공부해봐야 할 것 같음. 
+=> 이런저런 글도 찾아보고 코드도 수정해봤지만 안됨. 구글링해봐도 transparent background issue에 대해서 글만 있지 마땅한 해결방법은 없어보임.
+=> 너무 많은 시간을 소모해서 2D 배경대신 3D배경으로 바꿈.

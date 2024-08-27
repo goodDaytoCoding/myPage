@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import CubeScene from './CubeComp';
-import Stars from './Stars';
 import EdgesScene from './EdgesComp';
-// import Stars2 from './Stars2';
+import Stars2 from './Stars2';
 
 const CubeBackground = () => {
   const [rotationSpeed, setRotationSpeed] = useState(0.005);
@@ -15,9 +14,8 @@ const CubeBackground = () => {
   };
   return (
     <div className="cubeBackground">
-      <Stars />
       <Canvas camera={{ position: [10, 10, 10] }}>
-        {/* <Stars2 numStars={300} spreadRange={300} color={'white'} size={1} /> */}
+        <Stars2 numStars={300} spreadRange={300} color={'white'} size={2} />
         <CubeScene
           changeRotationSpeed={changeRotationSpeed}
           rotationSpeed={rotationSpeed}

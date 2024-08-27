@@ -164,17 +164,21 @@ const CubeEdges = ({ rotationSpeed }) => {
       resolution: new THREE.Vector2(window.innerWidth, window.innerHeight), // 해상도
     });
     const line = new Line2(geometry, material);
+
     return line;
   };
+
   useEffect(() => {
     const cubeEdges = createCubeEdges();
     edgesRef.current = cubeEdges;
+
     return () => {
       // 컴포넌트 언마운트 시 자원 해제
       cubeEdges.geometry.dispose();
       cubeEdges.material.dispose();
     };
   }, []);
+
   useFrame(({ scene }) => {
     if (edgesRef.current) {
       // 매 프레임마다 큐브 테두리를 장면에 추가
@@ -193,9 +197,11 @@ const CubeEdges = ({ rotationSpeed }) => {
 const Effects = () => {
   const { gl, scene, camera, size } = useThree();
   const composer = useRef();
+
   useEffect(() => {
     composer.current = new EffectComposer(gl);
     composer.current.setSize(size.width, size.height);
+
     const renderPass = new RenderPass(scene, camera);
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
@@ -203,15 +209,18 @@ const Effects = () => {
       0.4, // 블룸 반경
       0.85, // 블룸 세부 조정
     );
+
     composer.current.addPass(renderPass);
     composer.current.addPass(bloomPass);
   }, [gl, scene, camera, size]);
+
   useFrame(() => {
     if (composer.current) {
       // 매 프레임마다 composer를 사용하여 렌더링
       composer.current.render();
     }
   }, 1);
+
   return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
 };
 

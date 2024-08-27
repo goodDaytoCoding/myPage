@@ -21,12 +21,7 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
     ctx.fill();
 
     // 캔버스를 텍스처로 변환
-    const star = new THREE.CanvasTexture(canvas);
-    const state = star.userData;
-    state.x = 'test';
-    state.y = 'test';
-    // console.log(star);
-    return star;
+    return new THREE.CanvasTexture(canvas);
   };
 
   // 별 위치 생성 함수
@@ -48,6 +43,10 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
       generateStarPositions(numStars, spreadRange),
     );
 
+    // 각 별의 초기 불투명도 설정
+    const opacities = new Float32Array(numStars).fill(0);
+    geometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
+
     return geometry;
   }, [numStars, spreadRange]);
 
@@ -61,7 +60,6 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
       array[i] = 0; // 초기 상태: 어두운 상태
       timers[i] = Math.random() * 100; // 타이머 초기값 설정 (랜덤하게 시작)
     }
-
     return { array, timers };
   }, [numStars]);
 
@@ -69,38 +67,56 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
     for (let i = 0; i < numStars; i++) {
       // 별 상태 업데이트 (서서히 밝아졌다가 어두워지기)
       states.timers[i] += 1; // 타이머를 증가시킴
+
       if (states.array[i] < 1 && states.timers[i] < 100) {
-        // 0 ~ 100까지 서서히 밝아짐
-        states.array[i] += 0.01;
+        states.array[i] += 0.01; // 서서히 밝아짐
       } else if (states.array[i] > 0 && states.timers[i] >= 100) {
-        // 100 ~ 200까지 서서히 어두워짐
-        states.array[i] -= 0.01;
+        states.array[i] -= 0.01; // 서서히 어두워짐
       }
+
       if (states.timers[i] >= 200) {
         states.timers[i] = 0; // 타이머를 초기화
+        states.array[i] = 0; // 상태를 초기화하여 다시 어두워짐을 시작
       }
+
+      // 각 별의 불투명도 업데이트
+      points.current.geometry.attributes.opacity.array[i] = states.array[i];
     }
 
-    if (points.current) {
-      points.current.material.opacity =
-        states.array.reduce((acc, state) => acc + state, 0) / numStars;
-      points.current.material.needsUpdate = true;
-    }
+    points.current.geometry.attributes.opacity.needsUpdate = true;
+  });
+
+  // 셰이더 머티리얼을 사용하여 각 점의 불투명도를 개별적으로 설정
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      pointTexture: { value: createdStar },
+    },
+    vertexShader: `
+      attribute float opacity;
+      varying float vOpacity;
+      void main() {
+        vOpacity = opacity;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = ${size.toFixed(1)} * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+    fragmentShader: `
+      uniform sampler2D pointTexture;
+      varying float vOpacity;
+      void main() {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, vOpacity);
+        gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+      }
+    `,
+    transparent: true,
   });
 
   return (
     <points ref={points} geometry={starsGeometry}>
-      <pointsMaterial
-        color={color}
-        size={size}
-        sizeAttenuation
-        map={createdStar}
-        transparent
-        opacity={1.0}
-      />
+      <primitive object={material} attach="material" />
     </points>
   );
 };
 
 export default Stars2;
-//3D로 그리는 별은 카메라 분리 문제로 봉인
