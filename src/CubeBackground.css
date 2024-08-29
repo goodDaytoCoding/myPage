@@ -1,4 +1,4 @@
-.cubeBackground {
+.cube-background {
   background-color: black;
   position: absolute;
   width: 100%;
@@ -14,4 +14,12 @@
   background-color: red;
   border: 3px black;
   opacity: 0.5;
+}
+
+.cube-container {
+  display: flex;
+  height: 100vh; /* 전체 화면 높이 */
+  flex: 1; /* 화면의 반을 차지 */
+  background-color: black; /* 큐브의 배경이 될 색 */
+  position: relative; /* CubeScene이 이 안에 위치 */
 }

@@ -1,20 +1,13 @@
 import * as THREE from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useMemo, useRef } from 'react';
 import '../../CubeBackground.css';
 
-const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
-  const { raycaster, mouse } = useThree();
-  const [nextPage, setNextPage] = useState('/');
-  const navigate = useNavigate();
+const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
+  const { raycaster, mouse, camera } = useThree();
+  // const [nextPage, setNextPage] = useState('/');
+  // const navigate = useNavigate();
   const meshRef = useRef();
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
   const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
@@ -42,17 +35,17 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
     [faceTextures],
   );
 
-  const getNextURL = useCallback((faceIndex) => {
-    const faceURLs = [
-      '/profile',
-      '/aboutme',
-      '/gitaddress',
-      '/review',
-      '/stack',
-      '/portfolio',
-    ];
-    setNextPage(faceURLs[faceIndex]);
-  }, []);
+  // const getNextURL = useCallback((faceIndex) => {
+  //   const faceURLs = [
+  //     '/profile',
+  //     '/aboutme',
+  //     '/gitaddress',
+  //     '/review',
+  //     '/stack',
+  //     '/portfolio',
+  //   ];
+  //   setNextPage(faceURLs[faceIndex]);
+  // }, []);
 
   const onPointerDown = (event) => {
     startCoordinateRef.current = { x: event.clientX, y: event.clientY }; // 시작 좌표 저장
@@ -73,7 +66,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
       const intersects = raycaster.intersectObject(meshRef.current);
       if (intersects.length > 0) {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-        getNextURL(faceIndex);
+        getNextPage(faceIndex);
       }
     }
   };
@@ -120,11 +113,11 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
     }
   }, [raycaster, camera, mouse]);
 
-  useEffect(() => {
-    if (nextPage !== '/') {
-      navigate(nextPage);
-    }
-  }, [nextPage, navigate]);
+  // useEffect(() => {
+  //   if (nextPage !== '/') {
+  //     navigate(nextPage);
+  //   }
+  // }, [nextPage, navigate]);
 
   //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.
@@ -157,24 +150,15 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, camera }) => {
   );
 };
 
-const CubeScene = ({ rotationSpeed, changeRotationSpeed }) => {
-  const { gl, camera } = useThree();
-  const scene = useRef();
-
-  useFrame(() => {
-    gl.autoClear = false; //이전 렌더링 내용 유지 및 새로운 장면이 기존 내용 위에 렌더링 됨. 여러 렌더링 패스 사용시 유용한 설정
-    gl.clearDepth(); //깊이 버퍼 삭제
-    gl.render(scene.current, camera);
-  });
-
+const CubeScene = ({ rotationSpeed, changeRotationSpeed, getNextPage }) => {
   return (
-    <scene ref={scene}>
+    <>
       <ambientLight intensity={5} />
       <pointLight position={[10, 10, 10]} />
       <CubeComp
         changeRotationSpeed={changeRotationSpeed}
         rotationSpeed={rotationSpeed}
-        camera={camera}
+        getNextPage={getNextPage}
       />
       <OrbitControls
         enablePan={false}
@@ -182,7 +166,7 @@ const CubeScene = ({ rotationSpeed, changeRotationSpeed }) => {
         minDistance={5}
         maxDistance={20}
       />
-    </scene>
+    </>
   );
 };
 
