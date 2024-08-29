@@ -22,7 +22,7 @@ const CubeBackground = () => {
   };
 
   return (
-    <div className="cube-background">
+    <div className={`cube-background ${isOpenBoard ? 'board-open' : ''}`}>
       <div className="cube-container">
         <Canvas camera={{ position: [10, 10, 10] }}>
           <Stars2 numStars={300} spreadRange={300} color={'white'} size={2} />

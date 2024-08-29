@@ -1,25 +1,21 @@
 .cube-background {
-  background-color: black;
-  position: absolute;
+  display: flex;
+  height: 100vh;
   width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.stars {
-  position: absolute;
-}
-
-.hover123 {
-  background-color: red;
-  border: 3px black;
-  opacity: 0.5;
+  transition: all 0.5s ease;
 }
 
 .cube-container {
-  display: flex;
-  height: 100vh; /* 전체 화면 높이 */
-  flex: 1; /* 화면의 반을 차지 */
-  background-color: black; /* 큐브의 배경이 될 색 */
-  position: relative; /* CubeScene이 이 안에 위치 */
+  flex: 1;
+  position: relative;
+  /* transition: flex 0.5s ease; */
+  transition: transform 0.5s ease-in-out;
+}
+
+.cube-background.board-open {
+  width: 100%;
+}
+
+.cube-background.board-open .cube-container {
+  width: 50%;
 }

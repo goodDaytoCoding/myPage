@@ -1,9 +1,8 @@
-import CubeContainer from "../container/CubeContainer";
+import CubeContainer from '../container/CubeContainer';
 
 const Main = () => {
   return (
-    <div style={{ height: "400px", width: "100%" }}>
-      <h1>메인페이지</h1>
+    <div>
       <CubeContainer />
     </div>
   );
