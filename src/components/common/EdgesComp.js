@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
+
 import { useFrame, extend, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
@@ -8,6 +9,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
+
 extend({
   Line2,
   LineMaterial,
@@ -21,14 +23,78 @@ const CubeEdges = ({ rotationSpeed }) => {
   const edgesRef = useRef(); // 테두리를 위한 ref
 
   const createCubeEdges = () => {
+    const LENGTH = 1.51; //테두리 길이
     // 테두리의 12개의 엣지에 대한 좌표 설정
     const points = [
-      1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5,
-      1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5,
-      1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5,
-      -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5,
-      -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5,
-      -1.5, 1.5, -1.5,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      LENGTH,
+      -LENGTH,
+      LENGTH,
+      -LENGTH,
     ];
     // LineGeometry와 LineMaterial을 사용하여 테두리를 생성
     const geometry = new LineGeometry();
@@ -37,6 +103,7 @@ const CubeEdges = ({ rotationSpeed }) => {
       color: 0xffffff, //테두리 색상
       linewidth: 5, //테두리 굵기
       resolution: new THREE.Vector2(window.innerWidth, window.innerHeight), // 해상도
+      transparent: true,
     });
     const line = new Line2(geometry, material);
 

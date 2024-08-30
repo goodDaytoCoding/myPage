@@ -65,7 +65,6 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
 
       if (intersects.length > 0) {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-        // 적용하고 싶은 CSS 변화에 해당하는 코드 작성
         meshRef.current.material[faceIndex].opacity = 0.7; //opacity 조절
       }
     },
@@ -73,9 +72,9 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
   );
 
   const onPointerOut = useCallback(() => {
-    changeRotationSpeed(0.005); //회전속도 0.005로 회복
+    changeRotationSpeed(0.005); //회전속도 0.005
 
-    // 원래 텍스처로 돌아오기 위해 opacity를 초기화
+    //opacity를 초기화
     materials.forEach((_, index) => {
       meshRef.current.material[index].opacity = 1;
     });
@@ -87,9 +86,9 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
 
     if (intersects.length > 0) {
       const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-      // 면이 변경된 경우에만 초기화 및 색상 변경 수행
+      // 면이 변경된 경우에만 초기화 및 변경 수행
       if (faceIndex !== lastHoveredFaceIndexRef.current) {
-        // 이전에 색상이 변경된 면을 기본 상태로 초기화
+        // 이전에 변경된 면을 기본 상태로 초기화
         if (lastHoveredFaceIndexRef.current !== null) {
           meshRef.current.material[lastHoveredFaceIndexRef.current].opacity = 1;
         }

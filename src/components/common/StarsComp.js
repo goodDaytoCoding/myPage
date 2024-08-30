@@ -28,11 +28,13 @@ const StarsComp = ({ numStars, spreadRange, color, size }) => {
   // 별 위치 생성 함수
   const generateStarPositions = (numStars, spreadRange) => {
     const starPositions = [];
+    const minRange = spreadRange + 100;
+    const maxRange = spreadRange;
 
     for (let i = 0; i < numStars; i++) {
-      const x = THREE.MathUtils.randFloatSpread(spreadRange);
-      const y = THREE.MathUtils.randFloatSpread(spreadRange);
-      const z = THREE.MathUtils.randFloatSpread(spreadRange);
+      const x = THREE.MathUtils.randFloatSpread(minRange, maxRange);
+      const y = THREE.MathUtils.randFloatSpread(minRange, maxRange);
+      const z = THREE.MathUtils.randFloatSpread(minRange, maxRange);
       starPositions.push(x, y, z);
     }
 

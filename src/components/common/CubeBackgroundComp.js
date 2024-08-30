@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 
+import Board from './Board';
 import CubeScene from './CubeComp';
 import EdgesScene from './EdgesComp';
 import StarsScene from './StarsComp';
-import Board from './Board';
 
 import '../../lib/styles/CubeBackground.css';
 import '../../lib/styles/Board.css';
@@ -14,7 +14,7 @@ const CubeBackground = () => {
   const [rotationSpeed, setRotationSpeed] = useState(0.005);
   const [isOpenBoard, setIsOpenBoard] = useState(false);
 
-  const getNextPage = useCallback((faceIndex) => {
+  const getNextPage = useCallback(() => {
     setIsOpenBoard(true);
   }, []);
 
@@ -33,7 +33,7 @@ const CubeBackground = () => {
           />
           <EdgesScene rotationSpeed={rotationSpeed} />
           <StarsScene
-            numStars={300}
+            numStars={1000}
             spreadRange={300}
             color={'white'}
             size={2}
