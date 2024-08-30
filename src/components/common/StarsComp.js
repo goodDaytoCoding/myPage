@@ -1,8 +1,9 @@
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import React, { useMemo, useRef } from 'react';
 
-const Stars2 = ({ numStars, spreadRange, color, size }) => {
+import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
+
+const StarsComp = ({ numStars, spreadRange, color, size }) => {
   const points = useRef();
 
   // 별 텍스처 생성 함수
@@ -14,7 +15,7 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
     canvas.width = size;
     canvas.height = size;
 
-    // 동그란 점 그리기
+    // 동그란 별 그리기
     ctx.beginPath();
     ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
     ctx.fillStyle = color;
@@ -27,12 +28,14 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
   // 별 위치 생성 함수
   const generateStarPositions = (numStars, spreadRange) => {
     const starPositions = [];
+
     for (let i = 0; i < numStars; i++) {
       const x = THREE.MathUtils.randFloatSpread(spreadRange);
       const y = THREE.MathUtils.randFloatSpread(spreadRange);
       const z = THREE.MathUtils.randFloatSpread(spreadRange);
       starPositions.push(x, y, z);
     }
+
     return new THREE.Float32BufferAttribute(starPositions, 3);
   };
 
@@ -56,10 +59,12 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
   const states = useMemo(() => {
     const array = new Float32Array(numStars);
     const timers = new Float32Array(numStars);
+
     for (let i = 0; i < numStars; i++) {
       array[i] = 0; // 초기 상태: 어두운 상태
       timers[i] = Math.random() * 100; // 타이머 초기값 설정 (랜덤하게 시작)
     }
+
     return { array, timers };
   }, [numStars]);
 
@@ -119,4 +124,19 @@ const Stars2 = ({ numStars, spreadRange, color, size }) => {
   );
 };
 
-export default Stars2;
+const StarsScene = ({ numStars, spreadRange, color, size }) => {
+  return (
+    <>
+      <ambientLight intensity={5} />
+      <pointLight position={[10, 10, 10]} />
+      <StarsComp
+        numStars={numStars}
+        spreadRange={spreadRange}
+        color={color}
+        size={size}
+      />
+    </>
+  );
+};
+
+export default StarsScene;

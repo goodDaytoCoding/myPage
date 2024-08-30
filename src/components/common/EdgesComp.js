@@ -67,8 +67,9 @@ const CubeEdges = ({ rotationSpeed }) => {
     }
   });
 
-  return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
+  return null;
 };
+
 const Effects = () => {
   const { gl, scene, camera, size } = useThree();
   const composer = useRef();
@@ -96,7 +97,7 @@ const Effects = () => {
     }
   }, 1);
 
-  return null; // 이 컴포넌트는 렌더링할 JSX가 없으므로 null 반환
+  return null;
 };
 
 const EdgesScene = ({ rotationSpeed }) => {

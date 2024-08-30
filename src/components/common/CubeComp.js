@@ -1,13 +1,11 @@
-import * as THREE from 'three';
-import { useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import React, { useCallback, useMemo, useRef } from 'react';
-import '../../CubeBackground.css';
+
+import * as THREE from 'three';
+import { OrbitControls } from '@react-three/drei';
+import { useThree, useFrame } from '@react-three/fiber';
 
 const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
   const { raycaster, mouse, camera } = useThree();
-  // const [nextPage, setNextPage] = useState('/');
-  // const navigate = useNavigate();
   const meshRef = useRef();
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
   const endCoordinateRef = useRef({ x: null, y: null }); // 끝 좌표를 Ref로 저장
@@ -34,18 +32,6 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
       ),
     [faceTextures],
   );
-
-  // const getNextURL = useCallback((faceIndex) => {
-  //   const faceURLs = [
-  //     '/profile',
-  //     '/aboutme',
-  //     '/gitaddress',
-  //     '/review',
-  //     '/stack',
-  //     '/portfolio',
-  //   ];
-  //   setNextPage(faceURLs[faceIndex]);
-  // }, []);
 
   const onPointerDown = (event) => {
     startCoordinateRef.current = { x: event.clientX, y: event.clientY }; // 시작 좌표 저장
@@ -76,6 +62,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
       changeRotationSpeed(0); //회전 정지
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObject(meshRef.current);
+
       if (intersects.length > 0) {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
         // 적용하고 싶은 CSS 변화에 해당하는 코드 작성
@@ -112,12 +99,6 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
       }
     }
   }, [raycaster, camera, mouse]);
-
-  // useEffect(() => {
-  //   if (nextPage !== '/') {
-  //     navigate(nextPage);
-  //   }
-  // }, [nextPage, navigate]);
 
   //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.

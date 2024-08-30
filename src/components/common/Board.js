@@ -1,5 +1,6 @@
 import React from 'react';
-import '../../Board.css';
+
+import '../../lib/styles/Board.css';
 
 const Board = ({ isOpenBoard }) => {
   return (
