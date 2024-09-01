@@ -12,24 +12,30 @@ import '../../lib/styles/Board.css';
 
 const CubeBackground = () => {
   const [rotationSpeed, setRotationSpeed] = useState(0.005);
-  const [isOpenBoard, setIsOpenBoard] = useState(false);
+  const [boardIndex, setBoardIndex] = useState(null);
 
-  const getNextPage = useCallback(() => {
-    setIsOpenBoard(true);
+  const getBoardIndex = useCallback((index) => {
+    setBoardIndex(index);
   }, []);
 
   const changeRotationSpeed = (speed) => {
     return setRotationSpeed(speed);
   };
 
+  const closeBoard = useCallback(() => {
+    setBoardIndex(null);
+  }, []);
+
   return (
-    <div className={`cube-background ${isOpenBoard ? 'board-open' : ''}`}>
+    <div
+      className={`cube-background ${boardIndex !== null ? 'board-open' : ''}`}
+    >
       <div className="cube-container">
         <Canvas camera={{ position: [10, 10, 10] }}>
           <CubeScene
             rotationSpeed={rotationSpeed}
             changeRotationSpeed={changeRotationSpeed}
-            getNextPage={getNextPage}
+            getBoardIndex={getBoardIndex}
           />
           <EdgesScene rotationSpeed={rotationSpeed} />
           <StarsScene
@@ -41,7 +47,7 @@ const CubeBackground = () => {
         </Canvas>
       </div>
       <div className="board-container">
-        <Board isOpenBoard={isOpenBoard} />
+        <Board boardIndex={boardIndex} closeBoard={closeBoard} />
       </div>
     </div>
   );

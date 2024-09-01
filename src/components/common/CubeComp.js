@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from '@react-three/drei';
 import { useThree, useFrame } from '@react-three/fiber';
 
-const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
+const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   const { raycaster, mouse, camera } = useThree();
   const meshRef = useRef();
   const startCoordinateRef = useRef({ x: null, y: null }); // 시작 좌표를 Ref로 저장
@@ -12,6 +12,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
   const lastHoveredFaceIndexRef = useRef(null); // 마지막으로 선택된 면의 인덱스 추적
 
   // `useMemo`를 사용해 `faceTextures` 배열을 메모이제이션, 렌더링마다 재생성되기 때문에 useMemo 사용
+  // TextureLoader의 기본 경로가 "textures/" 로 되어있음
   const faceTextures = useMemo(
     () => [
       new THREE.TextureLoader().load('textures/profile.jpg'),
@@ -52,7 +53,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
       const intersects = raycaster.intersectObject(meshRef.current);
       if (intersects.length > 0) {
         const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-        getNextPage(faceIndex);
+        getBoardIndex(faceIndex);
       }
     }
   };
@@ -130,7 +131,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getNextPage }) => {
   );
 };
 
-const CubeScene = ({ rotationSpeed, changeRotationSpeed, getNextPage }) => {
+const CubeScene = ({ rotationSpeed, changeRotationSpeed, getBoardIndex }) => {
   return (
     <>
       <ambientLight intensity={5} />
@@ -138,7 +139,7 @@ const CubeScene = ({ rotationSpeed, changeRotationSpeed, getNextPage }) => {
       <CubeComp
         changeRotationSpeed={changeRotationSpeed}
         rotationSpeed={rotationSpeed}
-        getNextPage={getNextPage}
+        getBoardIndex={getBoardIndex}
       />
       <OrbitControls
         enablePan={false}

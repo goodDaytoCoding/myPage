@@ -23,6 +23,7 @@
 
 
 6 - 클릭시 페이지 만들기
+=> 대략적인 스케치 먼저 하고나서 만들기
 
 
 7 - 큐브 테두리 적용시키기
@@ -43,6 +44,7 @@
 => Cube와 Edge를 분리하고 Scene을 분리하였음.
 => Cube와 Edge의 ref가 분리되어 함께 회전하지 않고있음..
 => 부모 컴포넌트에서 자식 컴포넌트로 setState 변경하는 함수를 만들어 props로 보내서 제어함.
+=> stars를 Scene을 분리함.
 
 9 - "UnrealBloomPass with transparent background" 문제 발생
 => UnrealBloomPass를 사용하면 배경이 검은색으로 변함. 그래서 Stars가 묻혀버림. 예시 코드 찾았으나 복잡함..
@@ -50,3 +52,5 @@
 => vertextShader와 fragmentShader GLSL코드를 공부해봐야 할 것 같음. 
 => 이런저런 글도 찾아보고 코드도 수정해봤지만 안됨. 구글링해봐도 transparent background issue에 대해서 글만 있지 마땅한 해결방법은 없어보임.
 => 너무 많은 시간을 소모해서 2D 배경대신 3D배경으로 바꿈.
+
+10 - 큐브 이미지 6개 만들기

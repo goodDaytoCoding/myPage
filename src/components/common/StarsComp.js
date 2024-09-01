@@ -96,7 +96,7 @@ const StarsComp = ({ numStars, spreadRange, color, size }) => {
   // 셰이더 머티리얼을 사용하여 각 점의 불투명도를 개별적으로 설정
   const material = new THREE.ShaderMaterial({
     uniforms: {
-      pointTexture: { value: createdStar },
+      pointTexture: { value: createdStar, transparent: false },
     },
     vertexShader: `
       attribute float opacity;

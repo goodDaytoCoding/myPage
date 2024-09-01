@@ -2,17 +2,11 @@
   display: flex;
   height: 100vh;
   width: 100%;
-  transition: all 0.5s ease;
 }
 
 .cube-container {
-  flex: 1;
-  position: relative;
-  transition: flex 0.5s ease;
-}
-
-.cube-background.board-open {
-  width: 100%;
+  flex-basis: 100%;
+  transition: flex-basis 0.5s ease-in-out;
 }
 
 .cube-background.board-open .cube-container {
