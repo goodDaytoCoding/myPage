@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 
-import Board from './Board';
+import BoardComp from './BoardComp';
 import CubeScene from './CubeComp';
 import EdgesScene from './EdgesComp';
 import StarsScene from './StarsComp';
@@ -47,7 +47,7 @@ const CubeBackground = () => {
         </Canvas>
       </div>
       <div className="board-container">
-        <Board boardIndex={boardIndex} closeBoard={closeBoard} />
+        <BoardComp boardIndex={boardIndex} closeBoard={closeBoard} />
       </div>
     </div>
   );

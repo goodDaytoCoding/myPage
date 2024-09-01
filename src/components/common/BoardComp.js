@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../lib/styles/Board.css';
 
-const Board = ({ boardIndex, closeBoard }) => {
+const BoardComp = ({ boardIndex, closeBoard }) => {
   if (boardIndex === null || boardIndex === false) return null;
 
   let boardContent;
@@ -26,7 +26,18 @@ const Board = ({ boardIndex, closeBoard }) => {
       );
       break;
     case 2:
-      boardContent = <h1>깃허브 주소 or 바로 이동/새창열기</h1>;
+      boardContent = (
+        <div>
+          <h1>GitHub Address</h1>
+          <a
+            href="https://github.com/goodDaytoCoding"
+            target="_blank" //새 탭에서 열림
+            rel="noopener noreferrer" //새 탭 열릴 때 보안 문제 방지
+          >
+            깃허브 리포지토리로 이동
+          </a>
+        </div>
+      );
       break;
     case 3:
       boardContent = <h1>review 대체할 페이지 혹은 삭제</h1>;
@@ -61,4 +72,4 @@ const Board = ({ boardIndex, closeBoard }) => {
   );
 };
 
-export default Board;
+export default BoardComp;
