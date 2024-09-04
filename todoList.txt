@@ -1,19 +1,19 @@
-1 - 큐브 플리커 현상
+1 - 큐브 플리커 현상(O)
 => 잦은 상태변화로 인해 발생한 flickering 현상이었음.
    onPointerOver, onPointerOut 함수를 상태변경이 아닌 ref를 통한 제어 방식으로 수정하여 문제해결함.
    onPointerDown, onPointerUp 함수 또한 상태변경이 아닌 ref를 통해 제어하여 현재는 flickering 현상이 발생하지 않음.
    리렌더링 표시가 안떠서 리렌더링이 되지 않는다고 생각 했던게 문제해결을 하는데 오래걸리 함.
 
-2 - 별들 개별적인 상태부여
+2 - 별들 개별적인 상태부여(O)
 => 3D 별로 반짝이는 효과를 넣기에는 무리가 있어보였고 큐브와 분리했을 때 굳이 3D로 만들 이유가 없어서 2D로 바꾸었음.
 => 2D는 transparent background issue 때문에 힘들어보여서 3D로 다시 바꿈.
 => pointMaterial은 각 개체마다 다른 상태를 부여할 수 없어서 ShaderMaterial로 교체.
 => 불투명도와 깜빡임 주기를 개별로 설정하여 별들이 따로 깜빡이게 만들었음.
 
-3 - 마우스로 큐브 회전하면 별과 같이 회전함
+3 - 마우스로 큐브 회전하면 별과 같이 회전함(O)
 => 2와 동일.
 
-4 - 별 반짝이는 효과 다르게 만들기?
+4 - 별 반짝이는 효과 다르게 만들기?(O)
 =>현재 canvas로 그린 2D별이라 큐브랑 별이랑 겹치면 사각형 안에 동그라미가 있는 모양으로 보임.
   멀리있는 별은 겹쳐도 그런 현상이 없음. 큐브랑 가까이에 생성된 별만 해당되는 현상 같음.
   randFloatSpread의 최대값 최소값 지정해서 가까이 생성되는 것을 막음.
@@ -26,7 +26,7 @@
 => 대략적인 스케치 먼저 하고나서 만들기
 
 
-7 - 큐브 테두리 적용시키기
+7 - 큐브 테두리 적용시키기(O)
 => 현재 테두리가 큐브에 맞게 적용되지 않고 이상하게 적용되어 꺠지는 현상 발생..
 => 기존의 LineBasicMaterial은 lineWidth가 WebGL렌더러에 의해 설정과 무관하게 1로 고정되어 원하는 효과를 넣지 못함.
 => EdgesGeometry,shaderMaterial을 이용한 방법또한 lineWidth가 1로 고정되었음.
@@ -40,13 +40,13 @@
   테두리 transparent 설정으로 해결
 
 
-8 - 파일 정리
+8 - 파일 정리(O)
 => Cube와 Edge를 분리하고 Scene을 분리하였음.
 => Cube와 Edge의 ref가 분리되어 함께 회전하지 않고있음..
 => 부모 컴포넌트에서 자식 컴포넌트로 setState 변경하는 함수를 만들어 props로 보내서 제어함.
 => stars를 Scene을 분리함.
 
-9 - "UnrealBloomPass with transparent background" 문제 발생
+9 - "UnrealBloomPass with transparent background" 문제 발생(X)
 => UnrealBloomPass를 사용하면 배경이 검은색으로 변함. 그래서 Stars가 묻혀버림. 예시 코드 찾았으나 복잡함..
 => SelectiveBloom을 사용해보려고 postprocessing과 react/postprocessing을 사용해 봤으나 여전히 문제해결 못함..
 => vertextShader와 fragmentShader GLSL코드를 공부해봐야 할 것 같음. 

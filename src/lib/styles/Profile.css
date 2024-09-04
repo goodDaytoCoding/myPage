@@ -1,0 +1,22 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-container img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.profile-age,
+.profile-educationlevel,
+.profile-specialty,
+.profile-job,
+.profile-hobbies,
+.profile-contact {
+  text-align: center;
+  margin-top: 15px;
+}
