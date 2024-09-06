@@ -48,9 +48,11 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 1:
       boardContent = (
-        <div>
+        <div className="aboutMe">
           <h1>About Me</h1>
-          <div>자기소개</div>
+          <div className="aboutMe-container">
+            <p>개발자가 되고 싶어.</p>
+          </div>
         </div>
       );
       break;

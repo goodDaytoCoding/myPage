@@ -16,7 +16,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   const faceTextures = useMemo(
     () => [
       new THREE.TextureLoader().load('textures/profile.jpg'),
-      new THREE.TextureLoader().load('textures/aboutme.jpg'),
+      new THREE.TextureLoader().load('textures/aboutme.png'),
       new THREE.TextureLoader().load('textures/gitaddress.jpg'),
       new THREE.TextureLoader().load('textures/review.jpg'),
       new THREE.TextureLoader().load('textures/stack.jpg'),
