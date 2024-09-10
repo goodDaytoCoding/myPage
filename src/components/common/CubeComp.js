@@ -15,12 +15,12 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   // TextureLoader의 기본 경로가 "textures/" 로 되어있음
   const faceTextures = useMemo(
     () => [
-      new THREE.TextureLoader().load('textures/profile.jpg'),
+      new THREE.TextureLoader().load('textures/profile.png'),
       new THREE.TextureLoader().load('textures/aboutme.png'),
-      new THREE.TextureLoader().load('textures/gitaddress.jpg'),
-      new THREE.TextureLoader().load('textures/review.jpg'),
-      new THREE.TextureLoader().load('textures/stack.jpg'),
-      new THREE.TextureLoader().load('textures/portfolio.jpg'),
+      new THREE.TextureLoader().load('textures/gitaddress.png'),
+      new THREE.TextureLoader().load('textures/idea.png'),
+      new THREE.TextureLoader().load('textures/stack.png'),
+      new THREE.TextureLoader().load('textures/portfolio.png'),
     ],
     [],
   );
