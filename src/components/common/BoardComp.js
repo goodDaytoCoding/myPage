@@ -80,15 +80,22 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
           <div className="stack-container">
             <div className="stack-front">
               <h3>FrontEnd</h3>
-              <img src="public/textures/stack.jpg" alt="stack_img" />
+              <img src="/asset/HTML_img.jpg" alt="HTML" />
+              <img src="/asset/CSS_img.jpg" alt="CSS" />
+              <img src="/asset/JS_img.jpg" alt="JS" />
+              <img src="/asset/REACT_img.jpg" alt="REACT" />
+              <img src="/asset/REDUX_img.jpg" alt="REDUX" />
             </div>
             <div className="stack-back">
               <h3>BackEnd</h3>
-              <img src="public/textures/stack.jpg" alt="stack_img" />
+              <img src="/asset/NODEJS_img.jpg" alt="NODEJS" />
+              <img src="/asset/MONGODB_img.jpg" alt="MONGODB" />
+              <img src="/asset/MYSQL_img.jpg" alt="MYSQL" />
             </div>
             <div className="stack-version">
               <h3>Version Control</h3>
-              <img src="public/textures/stack.jpg" alt="stack_img" />
+              <img src="/asset/GIT_img.jpg" alt="GIT" />
+              <img src="/asset/GITHUB_img.jpg" alt="GITHUB" />
             </div>
           </div>
         </div>
