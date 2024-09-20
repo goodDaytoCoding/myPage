@@ -1,5 +1,16 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '../../../node_modules/@fortawesome/react-fontawesome/index';
+import {
+  faBriefcase,
+  faCalendar,
+  faEnvelope,
+  faGraduationCap,
+  faHouse,
+  faUser,
+} from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
+import { faSquarePhone } from '@fortawesome/free-solid-svg-icons';
+
 import '../../lib/styles/Board.css';
 import '../../lib/styles/Portfolio.css';
 import '../../lib/styles/Stack.css';
@@ -16,30 +27,49 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
         <div className="profile">
           <h1>Profile</h1>
           <div className="profile-container">
-            <img src="public/textures/portfolio.jpg" alt="증명사진" />
-            <p>안녕하세요! 상상하는 것을 만들고 싶은 개발자 최재호 입니다.</p>
+            <img src="asset/MYPHOTO.jpg" alt="증명사진" />
+            <p>
+              안녕하세요.
+              <br />
+              상상하는 것을 만들고 싶은 개발자 최재호 입니다.
+            </p>
+            <div className="profile-name">
+              <FontAwesomeIcon icon={faUser} size="2x" />
+              <h3>이름</h3>
+              <p>최재호</p>
+            </div>
             <div className="profile-age">
-              <h3>나이</h3>
-              <p>만 34세</p>
+              <FontAwesomeIcon icon={faCalendar} size="2x" />
+              <h3>생년월일</h3>
+              <p>1990. 06. 14 (만 34세)</p>
             </div>
             <div className="profile-educationlevel">
-              <h3>최종학력</h3>
-              <p>Kumoh National Institute of Technology</p>
+              <FontAwesomeIcon icon={faGraduationCap} size="2x" />
+              <h3>학력</h3>
+              <p>
+                금오공과대학교
+                <br />
+                (전자공학부)
+              </p>
             </div>
-            <div className="profile-specialty">
-              <h3>전공</h3>
-              <p>전자 공학</p>
+            <div className="profile-email">
+              <FontAwesomeIcon icon={faEnvelope} size="2x" />
+              <h3>이메일</h3>
+              <p>jaeho614a@gmail.com</p>
             </div>
             <div className="profile-job">
+              <FontAwesomeIcon icon={faBriefcase} size="2x" />
               <h3>목표 직무</h3>
               <p>Frontend Developer</p>
             </div>
             <div className="profile-hobbies">
-              <h3>취미</h3>
-              <p>독서, 운동, 노래부르기</p>
+              <FontAwesomeIcon icon={faHouse} size="2x" />
+              <h3>주소지</h3>
+              <p>경상북도 구미시</p>
             </div>
             <div className="profile-contact">
-              <h3>Contact</h3>
+              <FontAwesomeIcon icon={faSquarePhone} size="2x" />
+              <h3>연락처</h3>
               <p>010-5393-0614</p>
             </div>
           </div>
