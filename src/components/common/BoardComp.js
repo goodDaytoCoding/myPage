@@ -26,51 +26,67 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       boardContent = (
         <div className="profile">
           <h1>Profile</h1>
-          <div className="profile-container">
+          <div>
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>
               안녕하세요.
               <br />
               상상하는 것을 만들고 싶은 개발자 최재호 입니다.
             </p>
-            <div className="profile-name">
-              <FontAwesomeIcon icon={faUser} size="2x" />
-              <h3>이름</h3>
-              <p>최재호</p>
+          </div>
+          <div className="profile-container">
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faUser} size="3x" />
+              <div className="profile-content">
+                <h3>이름</h3>
+                <p>최재호</p>
+              </div>
             </div>
-            <div className="profile-age">
-              <FontAwesomeIcon icon={faCalendar} size="2x" />
-              <h3>생년월일</h3>
-              <p>1990. 06. 14 (만 34세)</p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faCalendar} size="3x" />
+              <div className="profile-content">
+                <h3>생년월일</h3>
+                <p>1990. 06. 14 (만 34세)</p>
+              </div>
             </div>
-            <div className="profile-educationlevel">
-              <FontAwesomeIcon icon={faGraduationCap} size="2x" />
-              <h3>학력</h3>
-              <p>
-                금오공과대학교
-                <br />
-                (전자공학부)
-              </p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faGraduationCap} size="3x" />
+              <div className="profile-content">
+                <h3>학력</h3>
+                <p>
+                  금오공과대학교
+                  <br />
+                  (전자공학부)
+                </p>
+              </div>
             </div>
-            <div className="profile-email">
-              <FontAwesomeIcon icon={faEnvelope} size="2x" />
-              <h3>이메일</h3>
-              <p>jaeho614a@gmail.com</p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faEnvelope} size="3x" />
+              <div className="profile-content">
+                <h3>이메일</h3>
+                <p>jaeho614a@gmail.com</p>
+              </div>
             </div>
-            <div className="profile-job">
-              <FontAwesomeIcon icon={faBriefcase} size="2x" />
-              <h3>목표 직무</h3>
-              <p>Frontend Developer</p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faBriefcase} size="3x" />
+              <div className="profile-content">
+                <h3>목표 직무</h3>
+                <p>Frontend Developer</p>
+              </div>
             </div>
-            <div className="profile-hobbies">
-              <FontAwesomeIcon icon={faHouse} size="2x" />
-              <h3>주소지</h3>
-              <p>경상북도 구미시</p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faHouse} size="3x" />
+              <div className="profile-content">
+                <h3>주소지</h3>
+                <p>경상북도 구미시</p>
+              </div>
             </div>
-            <div className="profile-contact">
-              <FontAwesomeIcon icon={faSquarePhone} size="2x" />
-              <h3>연락처</h3>
-              <p>010-5393-0614</p>
+            <div className="profile-item">
+              <FontAwesomeIcon icon={faSquarePhone} size="3x" />
+              <div className="profile-content">
+                <h3>연락처</h3>
+                <p>010-5393-0614</p>
+              </div>
             </div>
           </div>
         </div>
