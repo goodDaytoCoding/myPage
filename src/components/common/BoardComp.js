@@ -26,7 +26,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       boardContent = (
         <div className="profile">
           <h1>Profile</h1>
-          <div>
+          <div className="profile-image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>
               안녕하세요.
@@ -53,11 +53,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               <FontAwesomeIcon icon={faGraduationCap} size="3x" />
               <div className="profile-content">
                 <h3>학력</h3>
-                <p>
-                  금오공과대학교
-                  <br />
-                  (전자공학부)
-                </p>
+                <p>금오공과대학교(전자공학부)</p>
               </div>
             </div>
             <div className="profile-item">
