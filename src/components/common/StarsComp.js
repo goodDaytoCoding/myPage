@@ -30,11 +30,12 @@ const StarsComp = ({ numStars, spreadRange, color, size }) => {
     const starPositions = [];
     const minRange = spreadRange + 100;
     const maxRange = spreadRange;
+    const mRANGE = THREE.MathUtils.randFloatSpread(minRange, maxRange);
 
     for (let i = 0; i < numStars; i++) {
-      const x = THREE.MathUtils.randFloatSpread(minRange, maxRange);
-      const y = THREE.MathUtils.randFloatSpread(minRange, maxRange);
-      const z = THREE.MathUtils.randFloatSpread(minRange, maxRange);
+      const x = mRANGE;
+      const y = mRANGE;
+      const z = mRANGE;
       starPositions.push(x, y, z);
     }
 
