@@ -34,6 +34,40 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
     [faceTextures],
   );
 
+  const getIntersects = useCallback(() => {
+    raycaster.setFromCamera(mouse, camera);
+    return raycaster.intersectObject(meshRef.current);
+  }, [raycaster, mouse, camera]);
+
+  const calcFaceIndex = (intersects) => {
+    return Math.floor(intersects[0].faceIndex / 2);
+  };
+
+  const onReuceImage = (faceIndex) => {
+    const texture = meshRef.current.material[faceIndex].map;
+    texture.repeat.set(1.15, 1.15); // 크기 조정
+    texture.offset.set(-0.075, -0.075); // 이미지 중앙 정렬
+  };
+
+  const onRestoreImage = (texture) => {
+    texture.repeat.set(1, 1); // 크기 원상 복구
+    texture.offset.set(0, 0); // 위치 원상 복구
+  };
+
+  const onChangeCursorStyle = (state) => {
+    const CURSOR_STATES = {
+      OVER: 'pointer', // 포인터 변경
+      OUT: 'default', // 포인터 복구
+    };
+    if (CURSOR_STATES[state]) {
+      document.body.style.cursor = CURSOR_STATES[state]; // 상태에 맞는 커서로 변경
+    }
+  };
+
+  const onChagneOpacity = (index, transparency) => {
+    meshRef.current.material[index].opacity = transparency; //cube 해당 면의 opacity 조절
+  };
+
   const onPointerDown = (event) => {
     startCoordinateRef.current = { x: event.clientX, y: event.clientY }; // 시작 좌표 저장
     window.addEventListener('pointerup', onPointerUp);
@@ -49,51 +83,44 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
     );
     // 클릭 위치가 거의 동일한 경우 (픽셀 단위 허용 범위)
     if (distance < 5) {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(meshRef.current);
+      const intersects = getIntersects();
+
       if (intersects.length > 0) {
-        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+        const faceIndex = calcFaceIndex(intersects);
         getBoardIndex(faceIndex);
       }
     }
   };
 
-  const onPointerOver = useCallback(
-    (event) => {
-      changeRotationSpeed(0); //회전 정지
-      onChangeCursorStyle('OVER');
+  const onPointerOver = useCallback(() => {
+    const intersects = getIntersects();
 
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(meshRef.current);
+    changeRotationSpeed(0); //회전 정지
+    onChangeCursorStyle('OVER');
 
-      if (intersects.length > 0) {
-        const faceIndex = Math.floor(intersects[0].faceIndex / 2);
-        onResizeImage(faceIndex);
-        onChagneOpacity(faceIndex, 0.7);
-      }
-    },
-    [raycaster, camera, mouse, changeRotationSpeed],
-  );
+    if (intersects.length > 0) {
+      const faceIndex = calcFaceIndex(intersects);
+      onReuceImage(faceIndex);
+      onChagneOpacity(faceIndex, 0.7);
+    }
+  }, [changeRotationSpeed, getIntersects]);
 
   const onPointerOut = useCallback(() => {
     changeRotationSpeed(0.005); //회전속도 0.005
     onChangeCursorStyle('OUT');
-    meshRef.current.scale.set(1, 1, 1); // scale을 원래 크기로 복구
-    //opacity를 초기화
+
     materials.forEach((material, faceIndex) => {
       const texture = material.map;
-      texture.repeat.set(1, 1); // 크기 복구
-      texture.offset.set(0, 0); // 이미지 원위치
+      onRestoreImage(texture);
       onChagneOpacity(faceIndex, 1);
     });
   }, [materials, changeRotationSpeed]);
 
   const onPointerMove = useCallback(() => {
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObject(meshRef.current);
+    const intersects = getIntersects();
 
     if (intersects.length > 0) {
-      const faceIndex = Math.floor(intersects[0].faceIndex / 2);
+      const faceIndex = calcFaceIndex(intersects);
       // 면이 변경된 경우에만 초기화 및 변경 수행
       if (faceIndex !== lastHoveredFaceIndexRef.current) {
         // 이전에 변경된 면을 기본 상태로 초기화
@@ -101,35 +128,14 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
           onChagneOpacity(lastHoveredFaceIndexRef.current, 1);
           const prevTexture =
             meshRef.current.material[lastHoveredFaceIndexRef.current].map;
-          prevTexture.repeat.set(1, 1); // 크기 원상 복구
-          prevTexture.offset.set(0, 0); // 위치 원상 복구
+          onRestoreImage(prevTexture);
         }
         onChagneOpacity(faceIndex, 0.7);
-        onResizeImage(faceIndex);
+        onReuceImage(faceIndex);
         lastHoveredFaceIndexRef.current = faceIndex; // 현재 면 인덱스를 저장
       }
     }
-  }, [raycaster, camera, mouse]);
-
-  const onResizeImage = (faceIndex) => {
-    const texture = meshRef.current.material[faceIndex].map;
-    texture.repeat.set(1.15, 1.15); // 크기 조정
-    texture.offset.set(-0.075, -0.075); // 이미지 중앙 정렬
-  };
-
-  const onChangeCursorStyle = (state) => {
-    const CURSOR_STATES = {
-      OVER: 'pointer', // 포인터로 변경
-      OUT: 'default', // 상태 복구
-    };
-    if (CURSOR_STATES[state]) {
-      document.body.style.cursor = CURSOR_STATES[state]; // 상태에 맞는 커서로 변경
-    }
-  };
-
-  const onChagneOpacity = (index, transparency) => {
-    meshRef.current.material[index].opacity = transparency;
-  };
+  }, [getIntersects]);
 
   //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
   //ref를 통한 제어방식으로 변경하여 문제해결.
