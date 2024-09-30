@@ -26,7 +26,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       boardContent = (
         <div className="profile">
           <h1>Profile</h1>
-          <div className="profile-image">
+          <div className="image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>
               안녕하세요.
@@ -34,52 +34,52 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               상상하는 것을 만들고 싶은 개발자 최재호 입니다.
             </p>
           </div>
-          <div className="profile-container">
-            <div className="profile-item">
+          <div className="container">
+            <div className="item">
               <FontAwesomeIcon icon={faUser} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>이름</h3>
                 <p>최재호</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faCalendar} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>생년월일</h3>
                 <p>1990. 06. 14 (만 34세)</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faGraduationCap} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>학력</h3>
                 <p>금오공과대학교(전자공학부)</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faEnvelope} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>이메일</h3>
                 <p>jaeho614a@gmail.com</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faBriefcase} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>목표 직무</h3>
                 <p>Frontend Developer</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faHouse} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>주소지</h3>
                 <p>경상북도 구미시</p>
               </div>
             </div>
-            <div className="profile-item">
+            <div className="item">
               <FontAwesomeIcon icon={faSquarePhone} size="3x" />
-              <div className="profile-content">
+              <div className="content">
                 <h3>연락처</h3>
                 <p>010-5393-0614</p>
               </div>
@@ -90,9 +90,9 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 1:
       boardContent = (
-        <div className="aboutMe">
+        <div className="aboutme">
           <h1>About Me</h1>
-          <div className="aboutMe-container">
+          <div className="container">
             <p>개발자가 되고 싶어.</p>
           </div>
         </div>
@@ -119,8 +119,8 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       boardContent = (
         <div className="stack">
           <h1>Stack</h1>
-          <div className="stack-container">
-            <div className="stack-front">
+          <div className="container">
+            <div className="item">
               <h3>FrontEnd</h3>
               <img src="/asset/HTML_img.jpg" alt="HTML" />
               <img src="/asset/CSS_img.jpg" alt="CSS" />
@@ -128,13 +128,13 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               <img src="/asset/REACT_img.jpg" alt="REACT" />
               <img src="/asset/REDUX_img.jpg" alt="REDUX" />
             </div>
-            <div className="stack-back">
+            <div className="item">
               <h3>BackEnd</h3>
               <img src="/asset/NODEJS_img.jpg" alt="NODEJS" />
               <img src="/asset/MONGODB_img.jpg" alt="MONGODB" />
               <img src="/asset/MYSQL_img.jpg" alt="MYSQL" />
             </div>
-            <div className="stack-version">
+            <div className="item">
               <h3>Version Control</h3>
               <img src="/asset/GIT_img.jpg" alt="GIT" />
               <img src="/asset/GITHUB_img.jpg" alt="GITHUB" />
@@ -147,10 +147,10 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       boardContent = (
         <div className="portfolio">
           <h1>Portfolio</h1>
-          <div className="portfolio-container">
-            <div className="portfolio-items">
+          <div className="container">
+            <div className="item">
               <img src="public/textures/portfolio.jpg" alt="프로젝트 이름" />
-              <div className="portfolio-description">
+              <div className="description">
                 <h2>이름: Tripper Maker</h2>
                 <time datetime="2023-06">2023년 6월 - 2023년 7월</time>
                 <span>참여 인원: 3명</span>
