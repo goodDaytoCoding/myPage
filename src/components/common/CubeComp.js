@@ -65,7 +65,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   };
 
   const onChagneOpacity = (index, transparency) => {
-    meshRef.current.material[index].opacity = transparency; //cube 해당 면의 opacity 조절
+    meshRef.current.material[index].opacity = transparency; // cube 해당 면의 opacity 조절
   };
 
   const onPointerDown = (event) => {
@@ -95,7 +95,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   const onPointerOver = useCallback(() => {
     const intersects = getIntersects();
 
-    changeRotationSpeed(0); //회전 정지
+    changeRotationSpeed(0); // 회전 정지
     onChangeCursorStyle('OVER');
 
     if (intersects.length > 0) {
@@ -106,7 +106,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
   }, [changeRotationSpeed, getIntersects]);
 
   const onPointerOut = useCallback(() => {
-    changeRotationSpeed(0.005); //회전속도 0.005
+    changeRotationSpeed(0.005); // 회전속도 0.005
     onChangeCursorStyle('OUT');
 
     materials.forEach((material, faceIndex) => {
@@ -137,8 +137,8 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
     }
   }, [getIntersects]);
 
-  //함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
-  //ref를 통한 제어방식으로 변경하여 문제해결.
+  // 함수를 통해 상태변경 방식으로 할 경우 잦은 상태변경에 의한 flickering 현상이 빈번하게 발생함.
+  // ref를 통한 제어방식으로 변경하여 문제해결.
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += rotationSpeed;
@@ -157,7 +157,7 @@ const CubeComp = ({ changeRotationSpeed, rotationSpeed, getBoardIndex }) => {
     >
       <boxGeometry args={[3, 3, 3]} />
       {materials.map((material, index) => (
-        //이미지를 사용하려면 meshBasicMaterial 텍스트를 사용하려면 meshStandardMaterial
+        // 이미지를 사용하려면 meshBasicMaterial 텍스트를 사용하려면 meshStandardMaterial
         <meshBasicMaterial
           key={index}
           attach={`material-${index}`}

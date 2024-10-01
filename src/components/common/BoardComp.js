@@ -25,7 +25,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 0:
       boardContent = (
         <div className="profile">
-          <h1>Profile</h1>
+          <h3 className="category">Profile</h3>
           <div className="image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>
@@ -36,49 +36,63 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
           </div>
           <div className="container">
             <div className="item">
-              <FontAwesomeIcon icon={faUser} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faUser} size="3x" />
+              </div>
               <div className="content">
                 <h3>이름</h3>
                 <p>최재호</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faCalendar} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faCalendar} size="3x" />
+              </div>
               <div className="content">
                 <h3>생년월일</h3>
                 <p>1990. 06. 14 (만 34세)</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faGraduationCap} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faGraduationCap} size="3x" />
+              </div>
               <div className="content">
                 <h3>학력</h3>
                 <p>금오공과대학교(전자공학부)</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faEnvelope} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faEnvelope} size="3x" />
+              </div>
               <div className="content">
                 <h3>이메일</h3>
                 <p>jaeho614a@gmail.com</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faBriefcase} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faBriefcase} size="3x" />
+              </div>
               <div className="content">
                 <h3>목표 직무</h3>
                 <p>Frontend Developer</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faHouse} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faHouse} size="3x" />
+              </div>
               <div className="content">
                 <h3>주소지</h3>
                 <p>경상북도 구미시</p>
               </div>
             </div>
             <div className="item">
-              <FontAwesomeIcon icon={faSquarePhone} size="3x" />
+              <div className="icon">
+                <FontAwesomeIcon icon={faSquarePhone} size="3x" />
+              </div>
               <div className="content">
                 <h3>연락처</h3>
                 <p>010-5393-0614</p>
@@ -91,7 +105,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 1:
       boardContent = (
         <div className="aboutme">
-          <h1>About Me</h1>
+          <h1 className="category">About Me</h1>
           <div className="container">
             <p>개발자가 되고 싶어.</p>
           </div>
@@ -101,7 +115,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 2:
       boardContent = (
         <div>
-          <h1>GitHub Address</h1>
+          <h1 className="category">GitHub Address</h1>
           <a
             href="https://github.com/goodDaytoCoding"
             target="_blank" //새 탭에서 열림
@@ -118,7 +132,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 4:
       boardContent = (
         <div className="stack">
-          <h1>Stack</h1>
+          <h1 className="category">Stack</h1>
           <div className="container">
             <div className="item">
               <h3>FrontEnd</h3>
@@ -146,7 +160,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 5:
       boardContent = (
         <div className="portfolio">
-          <h1>Portfolio</h1>
+          <h1 className="category">Portfolio</h1>
           <div className="container">
             <div className="item">
               <img src="public/textures/portfolio.jpg" alt="프로젝트 이름" />
