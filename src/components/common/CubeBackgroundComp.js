@@ -64,9 +64,11 @@ const CubeBackground = () => {
           />
         </Canvas>
       </div>
-      <div className="board-container">
-        <BoardComp boardIndex={boardIndex} closeBoard={closeBoard} />
-      </div>
+      <BoardComp
+        className="board-container"
+        boardIndex={boardIndex}
+        closeBoard={closeBoard}
+      />
     </div>
   );
 };

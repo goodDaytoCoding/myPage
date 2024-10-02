@@ -1,7 +1,7 @@
-.profile {
+/* .profile {
   display: grid;
-  padding: 30px 15px;
-  height: 100%;
+  padding: 0 15px;
+  height: 100vh;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-template-rows: auto;
   grid-gap: 15px;
@@ -12,6 +12,13 @@
   background-color: red;
   grid-column: 1 / 13;
   grid-row: 1 / 2;
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  border-bottom: 2px solid black;
+  position: relative;
+  width: calc(100% + 30px);
+  margin-left: -15px;
 }
 
 .image {
@@ -32,18 +39,26 @@
 }
 
 .image p {
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .container {
   background-color: blue;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
   grid-column: 1 / 13;
   grid-row: 5 / 11;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .item {
   background-color: green;
   display: flex;
+  align-items: center;
+  margin-left: 18%;
 }
 
 .icon {
@@ -53,14 +68,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
 }
 
-@media (max-width: 1200px) {
+.content {
+  background-color: bisque;
+  margin-left: 10px;
 }
 
-@media (max-width: 768px) and (max-width: 1199px) {
+.content h3 {
+  background-color: brown;
+  margin-bottom: 5px;
 }
 
-@media (max-width: 360px) and (max-width: 767px) {
+.content h3,
+p {
+  font-size: 1rem;
 }
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 360px) {
+} */

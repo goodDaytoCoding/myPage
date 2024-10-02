@@ -24,17 +24,14 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
   switch (boardIndex) {
     case 0:
       boardContent = (
-        <div className="profile">
-          <h3 className="category">Profile</h3>
+        <div className="container">
+          <h3 className="category">PROFILE</h3>
           <div className="image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
-            <p>
-              안녕하세요.
-              <br />
-              상상하는 것을 만들고 싶은 개발자 최재호 입니다.
-            </p>
+            <p>안녕하세요.</p>
+            <p>상상하는 것을 만들고 싶은 개발자 최재호 입니다.</p>
           </div>
-          <div className="container">
+          <div className="item-box">
             <div className="item">
               <div className="icon">
                 <FontAwesomeIcon icon={faUser} size="3x" />
@@ -104,9 +101,9 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 1:
       boardContent = (
-        <div className="aboutme">
+        <div className="container">
           <h1 className="category">About Me</h1>
-          <div className="container">
+          <div className="item-box">
             <p>개발자가 되고 싶어.</p>
           </div>
         </div>
@@ -115,7 +112,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 2:
       boardContent = (
         <div>
-          <h1 className="category">GitHub Address</h1>
+          <h1 className="container">GitHub Address</h1>
           <a
             href="https://github.com/goodDaytoCoding"
             target="_blank" //새 탭에서 열림
@@ -131,9 +128,9 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 4:
       boardContent = (
-        <div className="stack">
+        <div className="container">
           <h1 className="category">Stack</h1>
-          <div className="container">
+          <div className="item-box">
             <div className="item">
               <h3>FrontEnd</h3>
               <img src="/asset/HTML_img.jpg" alt="HTML" />
@@ -159,9 +156,9 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 5:
       boardContent = (
-        <div className="portfolio">
+        <div className="container">
           <h1 className="category">Portfolio</h1>
-          <div className="container">
+          <div className="item-box">
             <div className="item">
               <img src="public/textures/portfolio.jpg" alt="프로젝트 이름" />
               <div className="description">
