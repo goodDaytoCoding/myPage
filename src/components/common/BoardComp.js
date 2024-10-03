@@ -25,7 +25,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 0:
       boardContent = (
         <div className="container">
-          <h3 className="category">PROFILE</h3>
+          <h3 className="board-name">PROFILE</h3>
           <div className="image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>안녕하세요.</p>
@@ -102,7 +102,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 1:
       boardContent = (
         <div className="container">
-          <h1 className="category">About Me</h1>
+          <h1 className="board-name">About Me</h1>
           <div className="item-box">
             <p>개발자가 되고 싶어.</p>
           </div>
@@ -129,7 +129,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 4:
       boardContent = (
         <div className="container">
-          <h1 className="category">Stack</h1>
+          <h1 className="board-name">Stack</h1>
           <div className="item-box">
             <div className="item">
               <h3>FrontEnd</h3>
@@ -157,7 +157,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
     case 5:
       boardContent = (
         <div className="container">
-          <h1 className="category">Portfolio</h1>
+          <h1 className="board-name">Portfolio</h1>
           <div className="item-box">
             <div className="item">
               <img src="public/textures/portfolio.jpg" alt="프로젝트 이름" />
