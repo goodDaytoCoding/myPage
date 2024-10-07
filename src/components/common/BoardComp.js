@@ -128,10 +128,10 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
       break;
     case 4:
       boardContent = (
-        <div className="container">
+        <div className="stack-container">
           <h1 className="board-name">Stack</h1>
-          <div className="item-box">
-            <div className="item">
+          <div className="stack-item-box">
+            <div className="stack-item">
               <h3>FrontEnd</h3>
               <img src="/asset/HTML_img.jpg" alt="HTML" />
               <img src="/asset/CSS_img.jpg" alt="CSS" />
@@ -139,13 +139,13 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               <img src="/asset/REACT_img.jpg" alt="REACT" />
               <img src="/asset/REDUX_img.jpg" alt="REDUX" />
             </div>
-            <div className="item">
+            <div className="stack-item">
               <h3>BackEnd</h3>
               <img src="/asset/NODEJS_img.jpg" alt="NODEJS" />
               <img src="/asset/MONGODB_img.jpg" alt="MONGODB" />
               <img src="/asset/MYSQL_img.jpg" alt="MYSQL" />
             </div>
-            <div className="item">
+            <div className="stack-item">
               <h3>Version Control</h3>
               <img src="/asset/GIT_img.jpg" alt="GIT" />
               <img src="/asset/GITHUB_img.jpg" alt="GITHUB" />
