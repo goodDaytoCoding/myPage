@@ -55,13 +55,13 @@ const CubeBackground = () => {
             changeRotationSpeed={changeRotationSpeed}
             getBoardIndex={getBoardIndex}
           />
-          <EdgesScene rotationSpeed={rotationSpeed} />
+          {/* <EdgesScene rotationSpeed={rotationSpeed} />
           <StarsScene
             numStars={1000}
             spreadRange={300}
             color={'white'}
             size={2}
-          />
+          /> */}
         </Canvas>
       </div>
       <BoardComp

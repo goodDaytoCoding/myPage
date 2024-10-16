@@ -47,7 +47,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               </div>
               <div className="content">
                 <h3>생년월일</h3>
-                <p>1990. 06. 14 (만 34세)</p>
+                <p>1990. 06. 14</p>
               </div>
             </div>
             <div className="item">
@@ -56,7 +56,7 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
               </div>
               <div className="content">
                 <h3>학력</h3>
-                <p>금오공과대학교(전자공학부)</p>
+                <p>금오공과대학교</p>
               </div>
             </div>
             <div className="item">
