@@ -16,7 +16,7 @@ import '../../lib/styles/Portfolio.css';
 import '../../lib/styles/Stack.css';
 import '../../lib/styles/Profile.css';
 
-const BoardComp = ({ boardIndex, closeBoard }) => {
+const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
   if (boardIndex === null || boardIndex === false) return null;
 
   let boardContent;
@@ -29,70 +29,91 @@ const BoardComp = ({ boardIndex, closeBoard }) => {
           <div className="image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>안녕하세요.</p>
-            <p>상상하는 것을 만들고 싶은 개발자 최재호 입니다.</p>
+            {isNarrowScreen ? (
+              <>
+                <div>상상하는 것을 만들고 싶은</div>
+                <div>개발자 최재호 입니다.</div>
+              </>
+            ) : (
+              <p>상상하는 것을 만들고 싶은 개발자 최재호 입니다.</p>
+            )}
           </div>
           <div className="item-box">
             <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faUser} size="3x" />
-              </div>
-              <div className="content">
-                <h3>이름</h3>
-                <p>최재호</p>
-              </div>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faCalendar} size="3x" />
-              </div>
-              <div className="content">
-                <h3>생년월일</h3>
-                <p>1990. 06. 14</p>
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faUser} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>이름</h3>
+                  <p>최재호</p>
+                </div>
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faGraduationCap} size="3x" />
-              </div>
-              <div className="content">
-                <h3>학력</h3>
-                <p>금오공과대학교</p>
-              </div>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faEnvelope} size="3x" />
-              </div>
-              <div className="content">
-                <h3>이메일</h3>
-                <p>jaeho614a@gmail.com</p>
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faCalendar} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>생년월일</h3>
+                  <p>1990. 06. 14</p>
+                </div>
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faBriefcase} size="3x" />
-              </div>
-              <div className="content">
-                <h3>목표 직무</h3>
-                <p>Frontend Developer</p>
-              </div>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faHouse} size="3x" />
-              </div>
-              <div className="content">
-                <h3>주소지</h3>
-                <p>경상북도 구미시</p>
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faGraduationCap} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>학력</h3>
+                  <p>금오공과대학교</p>
+                </div>
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <FontAwesomeIcon icon={faSquarePhone} size="3x" />
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faEnvelope} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>이메일</h3>
+                  <p>jaeho614a@gmail.com</p>
+                </div>
               </div>
-              <div className="content">
-                <h3>연락처</h3>
-                <p>010-5393-0614</p>
+            </div>
+            <div className="item">
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faBriefcase} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>목표 직무</h3>
+                  <p>Frontend Developer</p>
+                </div>
+              </div>
+            </div>
+            <div className="item">
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faHouse} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>주소지</h3>
+                  <p>경상북도 구미시</p>
+                </div>
+              </div>
+            </div>
+            <div className="item">
+              <div className="item-width">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faSquarePhone} size="3x" />
+                </div>
+                <div className="content">
+                  <h3>연락처</h3>
+                  <p>010-5393-0614</p>
+                </div>
               </div>
             </div>
           </div>

@@ -13,6 +13,7 @@ import '../../lib/styles/Board.css';
 const CubeBackground = () => {
   const [rotationSpeed, setRotationSpeed] = useState(0.005);
   const [boardIndex, setBoardIndex] = useState(null);
+  const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth < 860);
 
   const getBoardIndex = useCallback((index) => {
     setBoardIndex(index);
@@ -25,6 +26,10 @@ const CubeBackground = () => {
   const closeBoard = useCallback(() => {
     setBoardIndex(null);
   }, []);
+
+  const handleResize = () => {
+    setIsNarrowScreen(window.innerWidth < 860);
+  };
 
   useEffect(() => {
     let timeoutId;
@@ -42,6 +47,11 @@ const CubeBackground = () => {
       window.removeEventListener('resize', debouncedResize);
       clearTimeout(timeoutId);
     };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -68,6 +78,7 @@ const CubeBackground = () => {
         className="board-container"
         boardIndex={boardIndex}
         closeBoard={closeBoard}
+        isNarrowScreen={isNarrowScreen}
       />
     </div>
   );
