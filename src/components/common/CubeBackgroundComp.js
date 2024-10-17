@@ -4,8 +4,8 @@ import { Canvas } from '@react-three/fiber';
 
 import BoardComp from './BoardComp';
 import CubeScene from './CubeComp';
-import EdgesScene from './EdgesComp';
-import StarsScene from './StarsComp';
+// import EdgesScene from './EdgesComp';
+// import StarsScene from './StarsComp';
 
 import '../../lib/styles/CubeBackground.css';
 import '../../lib/styles/Board.css';

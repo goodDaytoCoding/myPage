@@ -27,3 +27,19 @@ body {
 .cube-background.board-open .cube-container {
   width: 50%;
 }
+
+@media (max-width: 600px) {
+  .cube-container {
+    transition: height 0.5s ease-in-out;
+    background-color: black;
+  }
+
+  .cube-background.board-open {
+    flex-direction: column;
+  }
+
+  .cube-background.board-open .cube-container {
+    width: 100%;
+    height: 50%;
+  }
+}
