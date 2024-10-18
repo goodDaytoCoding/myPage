@@ -150,10 +150,10 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
     case 4:
       boardContent = (
         <div className="stack-container">
-          <h1 className="stack-board-name">Stack</h1>
+          <h1 className="stack-board-name">STACK</h1>
           <div className="stack-front-box">
+            <h3>FRONTEND</h3>
             <div className="stack-item">
-              <h3>FrontEnd</h3>
               <img src="/asset/HTML_img.jpg" alt="HTML" />
               <img src="/asset/CSS_img.jpg" alt="CSS" />
               <img src="/asset/JS_img.jpg" alt="JS" />
@@ -162,16 +162,16 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
             </div>
           </div>
           <div className="stack-back-box">
+            <h3>BACKEND</h3>
             <div className="stack-item">
-              <h3>BackEnd</h3>
               <img src="/asset/NODEJS_img.jpg" alt="NODEJS" />
               <img src="/asset/MONGODB_img.jpg" alt="MONGODB" />
               <img src="/asset/MYSQL_img.jpg" alt="MYSQL" />
             </div>
           </div>
           <div className="stack-version-box">
+            <h3>VERSION CONTROL</h3>
             <div className="stack-item">
-              <h3>Version Control</h3>
               <img src="/asset/GIT_img.jpg" alt="GIT" />
               <img src="/asset/GITHUB_img.jpg" alt="GITHUB" />
             </div>

@@ -9,7 +9,7 @@
 
 .profile-board-name {
   grid-column: 1 / 11;
-  grid-row: 1 / 2;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
