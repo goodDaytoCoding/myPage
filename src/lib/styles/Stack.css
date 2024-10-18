@@ -1,45 +1,76 @@
-.stack {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 20px;
-  color: #333;
-}
-
-h1 {
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
 .stack-container {
+  display: grid;
+  padding: 0 15px;
+  height: 100vh;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 13px;
+  overflow: auto;
+}
+
+.stack-board-name {
+  grid-column: 1 / 11;
+  grid-row: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  padding: 8px 0;
+  color: white;
+  background: rgba(255, 0, 0, 0.7);
+}
+
+.stack-front-box {
+  grid-column: 1 / 11;
+  grid-row: 2 /5;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.stack-item-box {
-  background-color: #fff;
+.stack-back-box {
+  grid-column: 1 / 11;
+  grid-row: 5 /7;
   border-radius: 10px;
+  border: 1px solid black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-  width: 80%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.stack-container img {
-  border-radius: 50%;
-  max-width: 100%;
-  height: auto;
+.stack-version-box {
+  margin-bottom: 15px;
+  grid-column: 1 / 11;
+  grid-row: 7 /10;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stack-item h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 10px 0;
-  border-radius: 5px;
 }
 
-.stack-item:not(:last-child) {
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
+.stack-item img {
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  margin: 10px 5px;
 }
 
 @media (max-width: 768px) {

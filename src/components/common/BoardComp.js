@@ -24,9 +24,9 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
   switch (boardIndex) {
     case 0:
       boardContent = (
-        <div className="container">
-          <h3 className="board-name">PROFILE</h3>
-          <div className="image">
+        <div className="profile-container">
+          <h3 className="profile-board-name">PROFILE</h3>
+          <div className="profile-image">
             <img src="asset/MYPHOTO.jpg" alt="증명사진" />
             <p>안녕하세요.</p>
             {isNarrowScreen ? (
@@ -38,79 +38,79 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
               <p>상상하는 것을 만들고 싶은 개발자 최재호 입니다.</p>
             )}
           </div>
-          <div className="item-box">
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+          <div className="profile-item-box">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faUser} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>이름</h3>
                   <p>최재호</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faCalendar} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>생년월일</h3>
                   <p>1990. 06. 14</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faGraduationCap} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>학력</h3>
                   <p>금오공과대학교</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faEnvelope} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>이메일</h3>
                   <p>jaeho614a@gmail.com</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faBriefcase} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>목표 직무</h3>
                   <p>Frontend Developer</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faHouse} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>주소지</h3>
                   <p>경상북도 구미시</p>
                 </div>
               </div>
             </div>
-            <div className="item">
-              <div className="item-width">
-                <div className="icon">
+            <div className="profile-item">
+              <div className="profile-item-width">
+                <div className="profile-icon">
                   <FontAwesomeIcon icon={faSquarePhone} size="3x" />
                 </div>
-                <div className="content">
+                <div className="profile-content">
                   <h3>연락처</h3>
                   <p>010-5393-0614</p>
                 </div>
@@ -150,8 +150,8 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
     case 4:
       boardContent = (
         <div className="stack-container">
-          <h1 className="board-name">Stack</h1>
-          <div className="stack-item-box">
+          <h1 className="stack-board-name">Stack</h1>
+          <div className="stack-front-box">
             <div className="stack-item">
               <h3>FrontEnd</h3>
               <img src="/asset/HTML_img.jpg" alt="HTML" />
@@ -160,12 +160,16 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
               <img src="/asset/REACT_img.jpg" alt="REACT" />
               <img src="/asset/REDUX_img.jpg" alt="REDUX" />
             </div>
+          </div>
+          <div className="stack-back-box">
             <div className="stack-item">
               <h3>BackEnd</h3>
               <img src="/asset/NODEJS_img.jpg" alt="NODEJS" />
               <img src="/asset/MONGODB_img.jpg" alt="MONGODB" />
               <img src="/asset/MYSQL_img.jpg" alt="MYSQL" />
             </div>
+          </div>
+          <div className="stack-version-box">
             <div className="stack-item">
               <h3>Version Control</h3>
               <img src="/asset/GIT_img.jpg" alt="GIT" />
