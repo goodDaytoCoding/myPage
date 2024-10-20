@@ -79,3 +79,16 @@
   height: 5rem;
   margin: 10px 5px;
 }
+
+@media (max-width: 600px) {
+  .stack-container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 300px) {
+  .stack-container {
+    overflow-x: auto;
+  }
+}
