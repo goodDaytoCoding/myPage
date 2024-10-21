@@ -181,10 +181,10 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
       break;
     case 5:
       boardContent = (
-        <div className="container">
-          <h1 className="board-name">Portfolio</h1>
-          <div className="item-box">
-            <div className="item">
+        <div className="portfolio-container">
+          <h1 className="portfolio-board-name">PORTFOLIO</h1>
+          <div className="portfolio-item-box">
+            <div className="portfolio-item">
               <img src="public/textures/portfolio.jpg" alt="프로젝트 이름" />
               <div className="description">
                 <h2>이름: Tripper Maker</h2>
