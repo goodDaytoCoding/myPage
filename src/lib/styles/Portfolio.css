@@ -2,7 +2,7 @@
   display: grid;
   padding: 0 15px;
   height: 100vh;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 13px;
   overflow: auto;
   background: yellow;
@@ -28,10 +28,24 @@
   grid-column: 1 / 12;
   grid-row: 2 / 10;
   margin-bottom: 15px;
+  padding: 15px;
 }
 
 .portfolio-item {
   background-color: gray;
-  grid-column: 2 / 5;
-  grid-row: 2 / 5;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+}
+
+.portfolio-item:last-child {
+  margin-bottom: 0px;
+}
+
+.portfolio-item img {
+  width: 125px;
+  height: 125px;
+  margin-right: 10px;
 }
