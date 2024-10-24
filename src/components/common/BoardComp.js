@@ -187,6 +187,28 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
             <div className="portfolio-item">
               <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
               <div className="description">
+                <h2>Tripper Maker</h2>
+                <div>2023년 6월 - 2023년 7월</div>
+                <span>참여 인원: 3명</span>
+                <p>
+                  이 프로젝트는 여행을 좋아하는 사람들이 정보와 후기를 공유하는
+                  사이트입니다.
+                </p>
+                <span>
+                  링크 :
+                  <a
+                    href="https://github.com/goodDaytoCoding"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Tripper Maker
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div className="portfolio-item">
+              <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
+              <div className="description">
                 <h2>이름: Tripper Maker</h2>
                 <time datetime="2023-06">2023년 6월 - 2023년 7월</time>
                 <span>참여 인원: 3명</span>
