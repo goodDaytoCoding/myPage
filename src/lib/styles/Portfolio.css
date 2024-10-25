@@ -29,17 +29,22 @@
   grid-row: 2 / 10;
   margin-bottom: 15px;
   display: grid;
-  grid-template-rows: repeat(auto, 1fr);
-  row-gap: 15px;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, auto);
+  gap: 15px;
 }
 
 .portfolio-item {
+  grid-column: 1 / 11;
   cursor: pointer;
   background-color: gray;
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
 }
 
 .portfolio-item:last-child {
@@ -53,9 +58,6 @@
 }
 
 .description > * {
-  margin: 5px;
-}
-
-.description h2 {
-  margin-top: 0px;
+  margin: 10px;
+  background-color: aqua;
 }
