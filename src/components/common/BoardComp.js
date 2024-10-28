@@ -196,6 +196,30 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
                 </p>
               </div>
             </div>
+            <div className="portfolio-item">
+              <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
+              <div className="description">
+                <h2>Tripper Maker</h2>
+                <div>2023년 6월 - 2023년 7월</div>
+                <div>참여 인원: 3명</div>
+                <p>
+                  이 프로젝트는 여행을 좋아하는 사람들이 정보와 후기를 공유하는
+                  사이트입니다.
+                </p>
+              </div>
+            </div>
+            <div className="portfolio-item">
+              <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
+              <div className="description">
+                <h2>Tripper Maker</h2>
+                <div>2023년 6월 - 2023년 7월</div>
+                <div>참여 인원: 3명</div>
+                <p>
+                  이 프로젝트는 여행을 좋아하는 사람들이 정보와 후기를 공유하는
+                  사이트입니다.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       );
