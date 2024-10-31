@@ -1,0 +1,22 @@
+.aboutme-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutme-board-name {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  padding: 8px 0;
+  color: white;
+  background: rgba(255, 0, 0, 0.7);
+}
+
+.aboutme-item-box {
+}

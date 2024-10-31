@@ -15,6 +15,7 @@ import '../../lib/styles/Board.css';
 import '../../lib/styles/Portfolio.css';
 import '../../lib/styles/Stack.css';
 import '../../lib/styles/Profile.css';
+import '../../lib/styles/AboutMe.css';
 
 const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
   if (boardIndex === null || boardIndex === false) return null;
@@ -122,9 +123,9 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
       break;
     case 1:
       boardContent = (
-        <div className="container">
-          <h1 className="board-name">About Me</h1>
-          <div className="item-box">
+        <div className="aboutme-container">
+          <h1 className="aboutme-board-name">About Me</h1>
+          <div className="aboutme-item-box">
             <p>개발자가 되고 싶어.</p>
           </div>
         </div>
@@ -184,6 +185,18 @@ const BoardComp = ({ boardIndex, closeBoard, isNarrowScreen }) => {
         <div className="portfolio-container">
           <h1 className="portfolio-board-name">PORTFOLIO</h1>
           <div className="portfolio-item-box">
+            <div className="portfolio-item">
+              <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
+              <div className="description">
+                <h2>Tripper Maker</h2>
+                <div>2023년 6월 - 2023년 7월</div>
+                <div>참여 인원: 3명</div>
+                <p>
+                  이 프로젝트는 여행을 좋아하는 사람들이 정보와 후기를 공유하는
+                  사이트입니다.
+                </p>
+              </div>
+            </div>
             <div className="portfolio-item">
               <img src="/asset/REACT_img.jpg" alt="프로젝트 이름" />
               <div className="description">
