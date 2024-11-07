@@ -28,3 +28,8 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+.aboutme-item-box p {
+  font-size: 1.1rem;
+  margin-bottom: 17px;
+}
